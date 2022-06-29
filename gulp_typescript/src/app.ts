@@ -1,40 +1,17 @@
-import { Say } from './shared/say.service';
-import { Dialog } from './shared/dialog';
+const api_url = "https://pokeapi.co/api/v2/pokemon/arbok"
 
-class Module {
-  title = 'Starter Project';
-  say = new Say();
-  select = 'Dialog';
-
-  onload() {
-    const h1 = document.getElementsByTagName('h1')[0] as HTMLHeadingElement;
-    h1.innerText = this.title;
+async function getApi(url: string) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
   }
-
-  updateSelect(): void {
-    const select = document.getElementById('select') as HTMLSelectElement;
-    this.select = select.value;
-  }
-
-  updateDisplay(msg: string): void {
-    const display = document.getElementById('display') as HTMLDivElement;
-    display.innerText = msg;
-  }
-
-  shout(): void {
-    const input = document.getElementById('msg') as HTMLInputElement;
-    this.say.printLength(input.value);
-    switch (this.select) {
-      case 'Alert': this.say.alert(input.value); break;
-      case 'Console': this.say.console(input.value); break;
-      case 'UI': this.updateDisplay(input.value); break;
-      case 'Dialog': dialog.open(input.value); break;
-    }
+  catch (error) {
+    console.error(error);
   }
 }
-export const module = new Module();
-export const dialog = new Dialog();
 
-window.addEventListener('load', () => {
-  module.onload();
-});
+getApi(api_url)
+
+
+
