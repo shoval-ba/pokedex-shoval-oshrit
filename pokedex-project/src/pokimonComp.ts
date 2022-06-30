@@ -15,8 +15,8 @@ export class pokemonComponent {
   constructor(data: Pokemon, parent: HTMLElement) {
     this.data = data;
     this.parent = parent;
-    data.weight=data.weight/10;
-    data.height=data.height/10;
+    data.weight = data.weight ;
+    data.height = data.height;
   }
   render() {
     let parent = this.parent;
@@ -36,16 +36,21 @@ export class pokemonComponent {
       abilitiesName.push(' ' + name);
     }
     item.innerHTML = `
-    <img class ='img' src=' ${this.data.sprites.front_default}'>
-    <h1 class="name"> name: ${this.data.name}</h1>
+    <div class ='backgroundImg'>
+    <img class ='img' src=' ${this.data.sprites.other.dream_world.front_default}'>
+    </div>
+    <div class="title">
+    <h1 class="name"> ${this.data.name}</h1>
+    </div>
+    <div class='info'>
     <h3 class="id"> id: ${this.data.id}</h3>
-      <h3 class="weight"> weight: ${this.data.weight} kg </h3>
-      <h3 class="height"> height: ${this.data.height} m</h3>
+      <h3 class="weight"> weight: ${this.data.weight/10} kg </h3>
+      <h3 class="height"> height: ${this.data.height/10} m</h3>
       <h3 class="abilities"> abilities: ${abilitiesName}</h3>
       <h3 class="types"> types: ${typesName}</h3>
-      </div></div>
+    </div>
       `;
-    item.classList.add('laptop');
+    item.classList.add('item');
   }
 
 }

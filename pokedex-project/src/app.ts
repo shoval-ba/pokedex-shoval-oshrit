@@ -25,8 +25,24 @@ export async function renderIt() {
   console.log(pokemons);
   let content: HTMLElement | null = document.querySelector('#content')
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+}
 
 
+function search() {
+
+  const pokemonsDiv = document.querySelectorAll('.item');
+  pokemonsDiv.forEach(pokemonDiv => {
+    pokemonDiv.remove();
+  });
+
+  const search: HTMLInputElement | null = document.querySelector('.search');
+  const value = search?.value.toLowerCase();
+  for (const pokemon of pokemons) {
+    if (pokemon.name.toLowerCase().includes(value!)) {
+      let content: HTMLElement | null = document.querySelector('#content')
+      new pokemonComponent(pokemon, content!).render();
+    }
+  }
 }
 
 
@@ -34,6 +50,8 @@ export async function renderIt() {
 
 window.onload = () => {
   renderIt();
+  const searchButton = document.getElementsByClassName('searchButton')[0];
+  searchButton!.addEventListener('click', search)
 }
 
 
