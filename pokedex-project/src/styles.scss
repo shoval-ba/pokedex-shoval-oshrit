@@ -2,47 +2,98 @@ $font-famaly: Helvetica, sans-serif;
 $primary-color: #333;
 $text-color: white;
 
-*{
+* {
   box-sizing: border-box;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   position: relative;
   text-align: center;
   align-items: center;
-  .navbar{
+  .header {
+    width: 100%;
+    height: 800px;
+    background-color: rgb(115, 165, 165);
+  }
+  .navbar {
+    font-weight: bolder;
+
+    font-family: "Dosis", sans-serif;
     display: grid;
-    grid-template-columns: repeat(4,1fr) 6fr ;
+    grid-template-columns: repeat(4, 1fr) 6fr;
     margin: 0 auto;
     margin-bottom: 30px;
     background-color: rgba(155, 192, 180, 0.26);
-    .barChild{
+    .barChild {
       padding: 15px 0;
-      border: 1px rgb(2, 1, 3) solid;
-      color:rgba(24, 24, 122, 0.699);
+      border: 1px rgb(94, 122, 131) solid;
+      color: rgba(37, 51, 54, 0.699);
       cursor: pointer;
       font-size: 20px;
-      &:last-child{
+      &:last-child {
         text-align: right;
         padding-right: 3rem;
       }
-      .search{
+      .search {
         width: 20rem;
         height: 1.7rem;
         transition: width 1s;
-        &:hover{
+        &:hover {
           width: 21rem;
         }
       }
-      .searchButton{
+      .searchButton {
         height: 1.7rem;
         width: 1.7rem;
       }
     }
-    .barChild:hover{
+    .barChild:hover {
       font-weight: bold;
+    }
+  }
+  #content {
+    width: 85%;
+    margin: 0 auto;
+    display: grid;
+    gap: 40px;
+    grid-template-columns: auto auto auto auto;
+    font-family: "Dosis", sans-serif;
+    .item {
+      border: 1px solid rgb(187, 235, 241);
+      border-radius: 7px;
+      display: grid;
+      grid-template-rows: 1fr 0.3fr 0.8fr;
+      height: 100%;
+      width: 100%;
+      .backgroundImg {
+        background-color: rgb(61, 158, 158);
+        border-radius: 7px;
+
+        .img {
+          margin: 0 auto;
+          width: 75%;
+        }
+      }
+      .title {
+        font-size: 120%;
+        font-family: "volkhov", serif;
+      }
+
+      .info {
+        padding-left: 15px;
+        padding-right: 15px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        font-family: "Quicksand", sans-serif;
+        flex-wrap: wrap;
+        * {
+          border-bottom: 1px solid rgb(93, 192, 209);
+          margin-bottom: 10px;
+        }
+      }
     }
   }
 }
