@@ -1,4 +1,4 @@
-import { Pokemon, pokemonComponent } from "./pokimonComp";
+import { Pokemon, pokemonComponent } from "./pokemonComp";
 
 const api_url = "https://pokeapi.co/api/v2/pokemon?limit=151"
 
@@ -29,8 +29,7 @@ export async function renderIt() {
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
 }
 
-// Search for some pokemon by name
-function search() {
+function removeAllDivs(){
   const pokemonsDivBeforeSearch = document.querySelectorAll('.pokemonElement');
   pokemonsDivBeforeSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();
@@ -39,40 +38,47 @@ function search() {
   pokemonsDivAfterSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();
   });
+}
+
+// Search for some pokemon by name
+function search() {
+  removeAllDivs();
   const search: HTMLInputElement | null = document.querySelector('.search');
   const value = search?.value.toLowerCase();
-  const valueCheck = Number(search?.value);
-
   if (value === "") {
-    let content: HTMLElement | null = document.querySelector('#content2')
+    let content: HTMLElement | null = document.querySelector('#content2');
     pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
   }
-  else if (valueCheck == value) {
-
+  else if (Number(value)) {
     for (const pokemon of pokemons) {
-      if (pokemon.id == valueCheck!) {
-        let content: HTMLElement | null = document.querySelector('#content')
+      if (pokemon.id == Number(value)!) {
+        let content: HTMLElement | null = document.querySelector('#content');
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
-      // else if(valueCheck==Number)
     }
-
   }
   else {
     for (const pokemon of pokemons) {
       if (pokemon.name.toLowerCase().includes(value!)) {
-        let content: HTMLElement | null = document.querySelector('#content')
+        let content: HTMLElement | null = document.querySelector('#content');
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
-      // else if(valueCheck==Number)
     }
   }
+}
+
+function backToMainPage(){
+  removeAllDivs();
+  let content: HTMLElement | null = document.querySelector('#content2');
+  pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
 }
 
 window.onload = () => {
   renderIt();
   const searchButton = document.getElementsByClassName('searchButton')[0];
-  searchButton!.addEventListener('click', search)
+  searchButton!.addEventListener('click', search);
+  const pokemonList = document.getElementById('mainPage');
+  pokemonList!.addEventListener('click', backToMainPage);
 }
 
 

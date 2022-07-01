@@ -135,6 +135,9 @@ body {
     margin: 0 auto;
     margin-bottom: 30px;
     background-color: rgba(155, 192, 180, 0.26);
+    #mainPage:hover{
+      color: rgb(69, 69, 190);
+    }
     .barChild {
       padding: 15px 0;
       border: 1px rgb(94, 122, 131) solid;
