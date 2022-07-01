@@ -18,11 +18,29 @@ export class pokemonComponent {
     data.weight = data.weight ;
     data.height = data.height;
   }
-  render() {
+
+  // Renders the pokemons to the page.
+  render(){
+    let parent = this.parent;
+    const pokemonElement: HTMLDivElement = document.createElement('div');
+    parent.appendChild(pokemonElement);
+    pokemonElement.innerHTML = `
+    <div class ='backgroundImg'>
+    <img class ='img' src=' ${this.data.sprites.other.dream_world.front_default}'>
+    </div>
+    <div class="title">
+    <h1 class="name"> ${this.data.name}</h1>
+    <h3 class="id"> id: ${this.data.id}</h3>
+    </div>
+      `;
+    pokemonElement.classList.add('pokemonElement');
+  }
+
+  // Renders the pokemons after searce with the information about them.
+  renderAfterSearch() {
     let parent = this.parent;
     const item: HTMLDivElement = document.createElement('div');
     parent.appendChild(item);
-
     let typesName: any[] = [];
     for (let i = 0; i < this.data.types.length; i++) {
       const type = this.data.types[i].type;
