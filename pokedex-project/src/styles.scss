@@ -8,7 +8,7 @@ $text-color: white;
   padding: 0;
 }
 
-%content{
+%content {
   width: 85%;
   margin: 0 auto;
   display: grid;
@@ -17,30 +17,30 @@ $text-color: white;
   font-family: "Dosis", sans-serif;
 }
 
-%item{
+%item {
   border: 1px solid rgb(187, 235, 241);
   border-radius: 7px;
   display: grid;
   height: 100%;
   width: 100%;
 }
- %backgroundImg{
+%backgroundImg {
   background-color: rgb(61, 158, 158);
   border-radius: 7px;
   width: 100%;
   height: 300px;
- }
+}
 
- %img{
+%img {
   margin: 0 auto;
   width: 200px;
   height: 270px;
- }
+}
 
- %title{
+%title {
   font-size: 120%;
   font-family: "volkhov", serif;
- }
+}
 
 body {
   position: relative;
@@ -94,13 +94,37 @@ body {
     z-index: 2;
     width: 100%;
     height: 400px;
-    justify-content: space-around;
+    justify-content: center;
     display: flex;
     .character5 {
+      margin-right: 300px;
       position: relative;
       margin-top: 80px;
       width: 200px;
       height: 200px;
+    }
+    #phoneTitle {
+      margin-top: 130px;
+      margin-right: 940px;
+      position: absolute;
+      width: 190px;
+
+      font-family: "Quicksand", sans-serif;
+    }
+    #pikachuTitle {
+      margin-top: 110px;
+      margin-left: 1100px;
+      position: absolute;
+      width: 190px;
+
+      font-family: "Dosis", sans-serif;
+    }
+    #ballTitle {
+      margin-top: 110px;
+      margin-left: 70px;
+      position: absolute;
+      font-family: "Quicksand", sans-serif;
+      width: 190px;
     }
   }
   .navbar {

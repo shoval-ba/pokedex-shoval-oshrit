@@ -41,9 +41,22 @@ function search() {
   });
   const search: HTMLInputElement | null = document.querySelector('.search');
   const value = search?.value.toLowerCase();
-  if(value === ""){
+  const valueCheck = Number(search?.value);
+
+  if (value === "") {
     let content: HTMLElement | null = document.querySelector('#content2')
     pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+  }
+  else if (valueCheck == value) {
+
+    for (const pokemon of pokemons) {
+      if (pokemon.id == valueCheck!) {
+        let content: HTMLElement | null = document.querySelector('#content')
+        new pokemonComponent(pokemon, content!).renderAfterSearch();
+      }
+      // else if(valueCheck==Number)
+    }
+
   }
   else {
     for (const pokemon of pokemons) {
@@ -51,6 +64,7 @@ function search() {
         let content: HTMLElement | null = document.querySelector('#content')
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
+      // else if(valueCheck==Number)
     }
   }
 }
