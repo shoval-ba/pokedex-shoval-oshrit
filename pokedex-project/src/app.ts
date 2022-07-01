@@ -45,9 +45,6 @@ function search() {
   }
 }
 
-
-
-
 window.onload = () => {
   renderIt();
   const searchButton = document.getElementsByClassName('searchButton')[0];
