@@ -1,4 +1,4 @@
-import { Pokemon, pokemonComponent } from './pokemonComp';
+import { pokemonComponent } from './pokemonComp';
 
 const api_url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
 
@@ -167,6 +167,7 @@ function search() {
   }
 }
 
+// Renders all the pokemons.
 function backToMainPage() {
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content2');

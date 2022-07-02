@@ -8,6 +8,11 @@ $text-color: white;
   padding: 0;
 }
 
+%titlesIcons{
+  width: 190px;
+  font-family: "Montserrat Alternates", sans-serif;
+}
+
 %content {
   width: 85%;
   margin: 0 auto;
@@ -43,87 +48,70 @@ $text-color: white;
 }
 
 body {
-  position: relative;
   text-align: center;
   align-items: center;
   .header {
-    position: relative;
-    z-index: 1;
+    display: grid;
+    grid-template-rows: 1fr 2.5fr;
     width: 100%;
     height: 770px;
     background-color: rgb(80, 156, 156);
     .headerImg {
+      margin: 0 auto;
       width: 680px;
     }
     .imgCollection {
-      display: flex;
-      position: relative;
-      z-index: 0;
-
+      display: grid;
+      grid-template-columns: repeat(4 , 1fr);
       .character1 {
         width: 300px;
         height: 370px;
-        margin-left: 170px;
+        margin-left: 100px;
         padding-top: 80px;
       }
       .character4 {
         margin-top: 340px;
-        position: relative;
         width: 300px;
         height: 350px;
-        z-index: 2;
       }
-
       .character2 {
-        margin-left: 200px;
+        margin-left: 100px;
         width: 200px;
         height: 200px;
       }
       .character3 {
         transform: rotate(340deg);
         margin-top: 70px;
-        margin-left: 1300px;
-        position: absolute;
+        margin-left: 50px;
         width: 320px;
       }
     }
   }
   .icons {
     position: relative;
+    display: grid;
     background-color: rgb(255, 255, 255);
-    z-index: 2;
     width: 100%;
     height: 400px;
-    justify-content: center;
-    display: flex;
+    grid-template-columns: repeat(3 , 1fr);
+    .childIcon{
+      margin-top: 100px;
+      display: grid;
+      grid-template-columns: repeat(2 , 1fr);
+    }
     .character5 {
-      margin-right: 300px;
-      position: relative;
-      margin-top: 80px;
       width: 200px;
       height: 200px;
+      margin-left: 80px;
     }
     #phoneTitle {
-      margin-top: 130px;
-      margin-right: 940px;
-      position: absolute;
-      width: 190px;
-
-      font-family: "Montserrat Alternates", sans-serif;
+      @extend %titlesIcons;
     }
     #pikachuTitle {
-      margin-top: 110px;
-      margin-left: 1100px;
-      position: absolute;
-      width: 190px;
-      font-family: "Montserrat Alternates", sans-serif;
+      @extend %titlesIcons;
     }
     #ballTitle {
-      margin-top: 110px;
-      margin-left: 70px;
-      position: absolute;
-      width: 190px;
-      font-family: "Montserrat Alternates", sans-serif;
+      @extend %titlesIcons;
     }
   }
   .navbar {
@@ -217,7 +205,6 @@ body {
     background: rgba(51, 51, 51, 0.733);
     top: 0;
     padding-top: 100px;
-
     .popup {
       margin-top: 1250px;
       display: block;
