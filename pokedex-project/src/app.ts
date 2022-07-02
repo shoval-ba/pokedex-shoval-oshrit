@@ -83,19 +83,22 @@ function popup(event: any) {
   }
 
 }
+// Search for some pokemon by name
 function pagination() {
   const paginationButtons = document.getElementsByClassName('butttonPagination');
   for (let i = 0; i < paginationButtons.length; i++) {
-    const button = paginationButtons[i] as HTMLElement;
+    const button = paginationButtons[i] as HTMLButtonElement;
+    button.style.background = '#ddd';
     button.addEventListener('click', () => {
       for (let j = 1; j < 9; j++) {
         if (button.innerHTML == j.toString()) {
-          button.style.background = 'rgb(86, 207, 167)';
           removeAllDivs();
           const pokemons20 = pokemons.filter(pokemon => pokemon.id <= j * 20 && pokemon.id > j * 20 - 20);
           const content: HTMLElement | null = document.querySelector('#content2');
           pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
           const itemDivs = document.querySelectorAll('.pokemonElement');
+          pagination();
+          button.style.background = 'rgb(86, 207, 167)';
           for (let i = 0; i < itemDivs.length; i++) {
             const itemDiv = itemDivs[i];
             itemDiv.addEventListener('click', popup);
