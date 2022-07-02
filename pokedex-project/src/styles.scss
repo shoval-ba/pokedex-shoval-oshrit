@@ -14,7 +14,7 @@ $text-color: white;
   display: grid;
   gap: 40px;
   grid-template-columns: repeat(4, 1fr);
-  font-family: "Dosis", sans-serif;
+  font-family: "KoHo", sans-serif;
 }
 
 %item {
@@ -39,7 +39,7 @@ $text-color: white;
 
 %title {
   font-size: 120%;
-  font-family: "volkhov", serif;
+  font-family: "Montserrat Alternates", sans-serif;
 }
 
 body {
@@ -109,27 +109,26 @@ body {
       position: absolute;
       width: 190px;
 
-      font-family: "Quicksand", sans-serif;
+      font-family: "Montserrat Alternates", sans-serif;
     }
     #pikachuTitle {
       margin-top: 110px;
       margin-left: 1100px;
       position: absolute;
       width: 190px;
-
-      font-family: "Dosis", sans-serif;
+      font-family: "Montserrat Alternates", sans-serif;
     }
     #ballTitle {
       margin-top: 110px;
       margin-left: 70px;
       position: absolute;
-      font-family: "Quicksand", sans-serif;
       width: 190px;
+      font-family: "Montserrat Alternates", sans-serif;
     }
   }
   .navbar {
     font-weight: bolder;
-    font-family: "Dosis", sans-serif;
+    font-family: "Montserrat Alternates", sans-serif;
     display: grid;
     grid-template-columns: repeat(4, 1fr) 6fr;
     margin: 0 auto;
@@ -185,7 +184,7 @@ body {
         display: flex;
         flex-direction: column;
         text-align: left;
-        font-family: "Quicksand", sans-serif;
+        font-family: "Montserrat Alternates", sans-serif;
         flex-wrap: wrap;
         * {
           border-bottom: 1px solid rgb(147, 159, 161);
@@ -218,6 +217,7 @@ body {
     background: rgba(51, 51, 51, 0.733);
     top: 0;
     padding-top: 100px;
+
     .popup {
       display: block;
       width: 700px;
@@ -227,20 +227,23 @@ body {
       border-radius: 40px;
       display: flex;
       flex-direction: column;
+      font-family: "Montserrat Alternates", sans-serif;
       .imgPopupContainer {
         display: flex;
         width: 230px;
         height: 230px;
         border-radius: 50%;
         background-color: #333;
+        margin: 0 auto;
         .imgPopup {
-          padding-top: 30px;
           margin: 0 auto;
+          padding-top: 30px;
           width: 200px;
           height: 200px;
         }
       }
       .weightPopup {
+        font-family: "Gilda Display", serif;
       }
       .heightPopup {
       }
@@ -249,6 +252,8 @@ body {
       .typesPopup {
       }
       .statsPopup {
+        display: flex;
+        
       }
     }
   }
