@@ -1,22 +1,21 @@
-import { Pokemon, pokemonComponent } from "./pokemonComp";
+import { Pokemon, pokemonComponent } from './pokemonComp';
 
-const api_url = "https://pokeapi.co/api/v2/pokemon?limit=151"
+const api_url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
 
-export let pokemons: any[] = [];
+export const pokemons: any[] = [];
 
 // Gets the data from the website.
 export async function getApi(url: string) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    for (let pokemonData of data.results) {
+    for (const pokemonData of data.results) {
       const pokemonUrl = pokemonData.url;
       const detailes = await fetch(pokemonUrl);
       const pokemon = await detailes.json();
       pokemons.push(pokemon);
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
   }
 }
@@ -25,36 +24,42 @@ export async function getApi(url: string) {
 export async function renderIt() {
   await getApi(api_url);
   console.log(pokemons);
-  let content: HTMLElement | null = document.querySelector('#content2');
-  let pokemons20 = pokemons.filter(pokemon => pokemon.id <= 20)
+  const content: HTMLElement | null = document.querySelector('#content2');
+  const pokemons20 = pokemons.filter(pokemon => pokemon.id <= 20);
   pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
-  let itemDivs = document.querySelectorAll(".pokemonElement")
+  const itemDivs = document.querySelectorAll('.pokemonElement');
   for (let i = 0; i < itemDivs.length; i++) {
     const itemDiv = itemDivs[i];
-    itemDiv.addEventListener('click', popup)
+    itemDiv.addEventListener('click', popup);
   }
 }
 function popup(event: any) {
-  let currentPokemon = event.target.parentElement.id;
+  const currentPokemon = event.target.parentElement.id;
 
-  console.log(currentPokemon);
   removeAllDivs();
-  let popupContainer: HTMLElement | null = document.querySelector(".popupContainer");
+  const popupContainer: HTMLElement | null = document.querySelector('.popupContainer');
   popupContainer!.style.display = 'block';
+  const content: HTMLElement | null = document.querySelector('#content2');
   for (const pokemon of pokemons) {
     if (pokemon.id == currentPokemon!) {
-      popupContainer!.innerHTML = `
-
-<div class="popup" >
-<h1>rfkhrf</h1>
-</div>
-`
+      console.log(pokemon);
+      new pokemonComponent(pokemon, content!).render();
+      let popup = document.createElement('div');
+      popup.className = 'popup';
+      popupContainer?.appendChild(popup);
+      popup!.innerHTML = `
+      <div class="popup" >
+      <h1>${pokemon.name}  #${pokemon.id}</h1>
+      <h1>${pokemon.type}</h1>
+      <h1>${pokemon.name}</h1>
+      <h1 > ${pokemon.name}</h1>
+      </div>
+      `;
     }
   }
 
 }
 // characterImg!.addEventListener('click', popup)
-
 
 // console.log("3");
 // }
@@ -68,12 +73,17 @@ function pagination() {
         if (button.innerHTML == j.toString()) {
           button.style.background = 'rgb(86, 207, 167)';
           removeAllDivs();
-          let pokemons20 = pokemons.filter(pokemon => pokemon.id <= j * 20 && pokemon.id > j * 20 - 20)
-          let content: HTMLElement | null = document.querySelector('#content2');
+          const pokemons20 = pokemons.filter(pokemon => pokemon.id <= j * 20 && pokemon.id > j * 20 - 20);
+          const content: HTMLElement | null = document.querySelector('#content2');
           pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+          const itemDivs = document.querySelectorAll('.pokemonElement');
+          for (let i = 0; i < itemDivs.length; i++) {
+            const itemDiv = itemDivs[i];
+            itemDiv.addEventListener('click', popup);
+          }
         }
       }
-    })
+    });
   }
 }
 
@@ -94,25 +104,22 @@ function search() {
   const search: HTMLInputElement | null = document.querySelector('.search');
   const value = search?.value.toLowerCase();
 
-  if (value === "") {
-    let content: HTMLElement | null = document.querySelector('#content2');
+  if (value === '') {
+    const content: HTMLElement | null = document.querySelector('#content2');
     pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
 
-  }
-
-  else if (Number(value)) {
+  } else if (Number(value)) {
     for (const pokemon of pokemons) {
       if (pokemon.id == Number(value)!) {
-        let content: HTMLElement | null = document.querySelector('#content');
+        const content: HTMLElement | null = document.querySelector('#content');
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
     }
 
-  }
-  else {
+  } else {
     for (const pokemon of pokemons) {
       if (pokemon.name.toLowerCase().includes(value!)) {
-        let content: HTMLElement | null = document.querySelector('#content');
+        const content: HTMLElement | null = document.querySelector('#content');
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
     }
@@ -121,7 +128,7 @@ function search() {
 
 function backToMainPage() {
   removeAllDivs();
-  let content: HTMLElement | null = document.querySelector('#content2');
+  const content: HTMLElement | null = document.querySelector('#content2');
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
 }
 
@@ -132,9 +139,8 @@ window.onload = () => {
   const pokemonList = document.getElementById('mainPage');
   pokemonList!.addEventListener('click', backToMainPage);
   pagination();
-}
+};
 
 // function popup() {
 //   console.log("object");
 // }
-

@@ -10,8 +10,8 @@ export interface Pokemon {
   types: any[];
 }
 export class pokemonComponent {
-  data: Pokemon
-  parent: HTMLElement
+  data: Pokemon;
+  parent: HTMLElement;
   constructor(data: Pokemon, parent: HTMLElement) {
     this.data = data;
     this.parent = parent;
@@ -21,7 +21,7 @@ export class pokemonComponent {
 
   // Renders the pokemons to the page.
   render() {
-    let parent = this.parent;
+    const parent = this.parent;
     const pokemonElement: HTMLDivElement = document.createElement('div');
     parent.appendChild(pokemonElement);
     pokemonElement.innerHTML = `
@@ -39,19 +39,19 @@ export class pokemonComponent {
 
   // Renders the pokemons after searce with the information about them.
   renderAfterSearch() {
-    let parent = this.parent;
+    const parent = this.parent;
     const item: HTMLDivElement = document.createElement('div');
     parent.appendChild(item);
-    let typesName: any[] = [];
+    const typesName: any[] = [];
     for (let i = 0; i < this.data.types.length; i++) {
       const type = this.data.types[i].type;
-      let name: string = type.name;
+      const name: string = type.name;
       typesName.push(' ' + name);
     }
-    let abilitiesName: any[] = [];
+    const abilitiesName: any[] = [];
     for (let i = 0; i < this.data.abilities.length; i++) {
       const ability = this.data.abilities[i].ability;
-      let name: string = ability.name;
+      const name: string = ability.name;
       abilitiesName.push(' ' + name);
     }
     item.innerHTML = `
