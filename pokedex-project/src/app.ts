@@ -39,8 +39,9 @@ export async function renderIt() {
   }
 }
 
+// Popop information for the chosen pokemon.
 function popup(event: any) {
-  const currentPokemon = event.target.parentElement.id;
+  const currentPokemon = event.target.id;
   const popupContainer: HTMLElement | null = document.querySelector('.popupContainer');
   popupContainer!.style.display = 'block';
   for (const pokemon of pokemons) {
@@ -65,7 +66,6 @@ function popup(event: any) {
         const statLevel = pokemon.stats[i].effort;
         stats.push(`${stat}:${statLevel}`);
       }
-      // new pokemonComponent(pokemon, content!).render();
       let popup = document.createElement('div');
       popup.className = 'popup';
       popupContainer?.appendChild(popup);
@@ -83,8 +83,6 @@ function popup(event: any) {
         <h3 class="abilitiesPopup"> abilities: ${abilitiesName}</h3>
         <h3 class="typesPopup"> types: ${typesName}</h3>
         <h3 class="statsPopup"> types: ${stats}</h3>
-        
-
       `;
       const closePopups = document.querySelectorAll('.close');
       for (let i = 0; i < closePopups.length; i++) {
@@ -96,8 +94,8 @@ function popup(event: any) {
       }
     }
   }
-
 }
+
 // Search for some pokemon by name
 function pagination() {
   const paginationButtons = document.getElementsByClassName('butttonPagination');
@@ -118,21 +116,14 @@ function pagination() {
             const itemDiv = itemDivs[i];
             itemDiv.addEventListener('click', popup);
           }
-          const closePopups = document.querySelectorAll('.close');
-          for (let i = 0; i < closePopups.length; i++) {
-            const closePopup = closePopups[i];
-            closePopup!.addEventListener('click', () => {
-              console.log("gg");
-            });
-          }
         }
       }
     });
   }
 }
 
+// Removes all the elements.
 function removeAllDivs() {
-  console.log("object");
   const pokemonsDivBeforeSearch = document.querySelectorAll('.pokemonElement');
   pokemonsDivBeforeSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();
@@ -180,6 +171,11 @@ function backToMainPage() {
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content2');
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+  const itemDivs = document.querySelectorAll('.pokemonElement');
+  for (let i = 0; i < itemDivs.length; i++) {
+    const itemDiv = itemDivs[i];
+    itemDiv.addEventListener('click', popup);
+  }
 }
 
 window.onload = () => {

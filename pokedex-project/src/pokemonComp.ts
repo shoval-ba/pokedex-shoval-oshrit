@@ -26,16 +26,16 @@ export class pokemonComponent {
     parent.appendChild(pokemonElement);
     pokemonElement.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
-    <img class ='img' src=' ${this.data.sprites.other.dream_world.front_default}'>
+    <img class ='img' id ="${this.data.id}" src=' ${this.data.sprites.other.dream_world.front_default}'>
     </div>
     <div class="title" id='${this.data.id}'>
-    <h1 class="name"> ${this.data.name}</h1>
-    <h3 class="id"> id: ${this.data.id}</h3>
+    <h1 class="name" id ="${this.data.id}"> ${this.data.name}</h1>
+    <h3 class="id" id ="${this.data.id}"> id: ${this.data.id}</h3>
     </div>
       `;
     pokemonElement.classList.add('pokemonElement');
 
-    pokemonElement.id=`${this.data.id}`
+    pokemonElement.id = `${this.data.id}`
   }
 
   // Renders the pokemons after searce with the information about them.
@@ -57,21 +57,21 @@ export class pokemonComponent {
     }
     item.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
-    <img class ='img' id ="${this.data.id} "src=' ${this.data.sprites.other.dream_world.front_default}'>
+    <img class ='img' id ="${this.data.id}" src=' ${this.data.sprites.other.dream_world.front_default}'>
     </div>
-    <div class="title" id ="${this.data.id}>
-    <h1 class="name"> ${this.data.name}</h1>
+    <div class="title" id ="${this.data.id}" style.font-family:"KoHo", sans-serif;>
+    <h1 class="name" id ="${this.data.id}"> ${this.data.name}</h1>
     </div>
-    <div class='info' id ="${this.data.id}>
-    <h3 class="id"> id: ${this.data.id}</h3>
-      <h3 class="weight"> weight: ${this.data.weight / 10} kg </h3>
-      <h3 class="height"> height: ${this.data.height / 10} m</h3>
-      <h3 class="abilities"> abilities: ${abilitiesName}</h3>
-      <h3 class="types"> types: ${typesName}</h3>
+    <div class='info' id ="${this.data.id}" style.font-family:"KoHo", sans-serif>
+    <h3 class="id" id ="${this.data.id}"> id: ${this.data.id} </h3>
+      <h3 class="weight" id ="${this.data.id}"> weight: ${this.data.weight / 10} kg </h3>
+      <h3 class="height" id ="${this.data.id}"> height: ${this.data.height / 10} m</h3>
+      <h3 class="abilities" id ="${this.data.id}"> abilities: ${abilitiesName}</h3>
+      <h3 class="types" id ="${this.data.id}"> types: ${typesName}</h3>
     </div>
       `;
     item.classList.add('item');
-    item.id=`${this.data.id}`
+    item.id = `${this.data.id}`
   }
 
 }
