@@ -42,28 +42,47 @@ function popup(event: any) {
   const content: HTMLElement | null = document.querySelector('#content2');
   for (const pokemon of pokemons) {
     if (pokemon.id == currentPokemon!) {
-      console.log(pokemon);
+      const typesName: any[] = [];
+      for (let i = 0; i < pokemon.types.length; i++) {
+        const type = pokemon.types[i].type;
+        const name: string = type.name;
+        typesName.push(' ' + name);
+      }
+      const abilitiesName: any[] = [];
+      for (let i = 0; i < pokemon.abilities.length; i++) {
+        const ability = pokemon.abilities[i].ability;
+        const name: string = ability.name;
+        abilitiesName.push(' ' + name);
+      }
+      const stats: any[] = [];
+      for (let i = 0; i < pokemon.stats.length; i++) {
+        const stat = pokemon.stats[i].stat.name;
+        const statLevel = pokemon.stats[i].effort;
+        stats.push(`${stat}:${statLevel}`);
+      }
       new pokemonComponent(pokemon, content!).render();
       let popup = document.createElement('div');
       popup.className = 'popup';
       popupContainer?.appendChild(popup);
+      console.log(pokemon);
       popup!.innerHTML = `
       <div class="popup" >
       <h1>${pokemon.name}  #${pokemon.id}</h1>
-      <h1>${pokemon.type}</h1>
-      <h1>${pokemon.name}</h1>
-      <h1 > ${pokemon.name}</h1>
+      <div class='imgPopupContainer'>
+'      <img class ='imgPopup' src=' ${pokemon.sprites.other.dream_world.front_default}'></div>
+        <h3 class="weightpopup"> weight: ${pokemon.weight / 10} kg </h3>
+        <h3 class="heightpopup"> height: ${pokemon.height / 10} m</h3>
+        <h3 class="abilitiesPopup"> abilities: ${abilitiesName}</h3>
+        <h3 class="typesPopup"> types: ${typesName}</h3>
+        <h3 class="statsPopup"> types: ${stats}</h3>
+        
+
       </div>
       `;
     }
   }
 
 }
-// characterImg!.addEventListener('click', popup)
-
-// console.log("3");
-// }
-// Search for some pokemon by name
 function pagination() {
   const paginationButtons = document.getElementsByClassName('butttonPagination');
   for (let i = 0; i < paginationButtons.length; i++) {

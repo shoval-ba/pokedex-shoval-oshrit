@@ -225,7 +225,31 @@ body {
       margin: 0 auto;
       background-color: aliceblue;
       border-radius: 40px;
-      border: 2px solid rgb(57, 97, 97);
+      display: flex;
+      flex-direction: column;
+      .imgPopupContainer {
+        display: flex;
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        background-color: #333;
+        .imgPopup {
+          padding-top: 30px;
+          margin: 0 auto;
+          width: 200px;
+          height: 200px;
+        }
+      }
+      .weightPopup {
+      }
+      .heightPopup {
+      }
+      .abilitiesPopup {
+      }
+      .typesPopup {
+      }
+      .statsPopup {
+      }
     }
   }
   .pagination {
