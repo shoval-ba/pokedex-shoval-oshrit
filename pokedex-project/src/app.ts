@@ -2,7 +2,7 @@ import { pokemonComponent } from './pokemonComp';
 
 const api_url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
 
-export let pokemons: any[] = [];
+export const pokemons: any[] = [];
 
 // Gets the data from the website.
 export async function getApi(url: string) {
@@ -66,7 +66,7 @@ function popup(event: any) {
         const statLevel = pokemon.stats[i].effort;
         stats.push(`${stat}:${statLevel}`);
       }
-      let popup = document.createElement('div');
+      const popup = document.createElement('div');
       popup.className = 'popup';
       popupContainer?.appendChild(popup);
       popup!.innerHTML = `
@@ -189,4 +189,3 @@ window.onload = () => {
   const paginationFirstButton = document.getElementsByClassName('butttonPagination')[0] as HTMLElement;
   paginationFirstButton.style.background = 'rgb(86, 207, 167)';
 };
-

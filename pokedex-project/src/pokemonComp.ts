@@ -15,8 +15,6 @@ export class pokemonComponent {
   constructor(data: Pokemon, parent: HTMLElement) {
     this.data = data;
     this.parent = parent;
-    data.weight = data.weight;
-    data.height = data.height;
   }
 
   // Renders the pokemons to the page.
@@ -35,7 +33,7 @@ export class pokemonComponent {
       `;
     pokemonElement.classList.add('pokemonElement');
 
-    pokemonElement.id = `${this.data.id}`
+    pokemonElement.id = `${this.data.id}`;
   }
 
   // Renders the pokemons after searce with the information about them.
@@ -71,7 +69,7 @@ export class pokemonComponent {
     </div>
       `;
     item.classList.add('item');
-    item.id = `${this.data.id}`
+    item.id = `${this.data.id}`;
   }
 
 }
