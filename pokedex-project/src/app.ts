@@ -26,7 +26,8 @@ export async function renderIt() {
   await getApi(api_url);
   console.log(pokemons);
   let content: HTMLElement | null = document.querySelector('#content2');
-  pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+  let pokemons20 = pokemons.filter(pokemon => pokemon.id <= 20 )
+  pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
 }
 
 function removeAllDivs(){
@@ -67,6 +68,24 @@ function search() {
   }
 }
 
+function pagination(){
+  const paginationButtons = document.getElementsByClassName('butttonPagination');
+  for(let i=0; i <paginationButtons.length; i++){
+    const button = paginationButtons[i] as HTMLElement;
+    button.addEventListener('click',()=>{
+      for(let j=1;j<9;j++){
+        if(button.innerHTML == j.toString()){
+          button.style.background = 'rgb(86, 207, 167)';
+          removeAllDivs();
+          let pokemons20 = pokemons.filter(pokemon => pokemon.id <= j*20 && pokemon.id > j*20-20)
+          let content: HTMLElement | null = document.querySelector('#content2');
+          pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+        }
+      }
+      })
+   }
+}
+
 function backToMainPage(){
   removeAllDivs();
   let content: HTMLElement | null = document.querySelector('#content2');
@@ -79,6 +98,6 @@ window.onload = () => {
   searchButton!.addEventListener('click', search);
   const pokemonList = document.getElementById('mainPage');
   pokemonList!.addEventListener('click', backToMainPage);
+  pagination();
 }
-
 
