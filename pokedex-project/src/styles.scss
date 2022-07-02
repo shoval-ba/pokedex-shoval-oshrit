@@ -227,4 +227,17 @@ body {
       border: 2px solid rgb(57, 97, 97);
     }
   }
+  .pagination {
+    display: inline-block;
+    .butttonPagination {
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+      background-color: #ddd;
+    }
+    .butttonPagination:hover {
+      color: blue;
+    }
+  }
 }
