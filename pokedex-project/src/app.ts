@@ -32,16 +32,21 @@ export async function renderIt() {
     const itemDiv = itemDivs[i];
     itemDiv.addEventListener('click', popup);
   }
+  const divsAfterSearch = document.querySelectorAll('.item');
+  for (let i = 0; i < divsAfterSearch.length; i++) {
+    const divAfterSearch = divsAfterSearch[i];
+    divAfterSearch.addEventListener('click', popup);
+  }
 }
+
 function popup(event: any) {
   const currentPokemon = event.target.parentElement.id;
-
-  removeAllDivs();
   const popupContainer: HTMLElement | null = document.querySelector('.popupContainer');
   popupContainer!.style.display = 'block';
-  const content: HTMLElement | null = document.querySelector('#content2');
   for (const pokemon of pokemons) {
     if (pokemon.id == currentPokemon!) {
+      console.log(currentPokemon);
+      console.log(pokemon);
       const typesName: any[] = [];
       for (let i = 0; i < pokemon.types.length; i++) {
         const type = pokemon.types[i].type;
@@ -60,13 +65,16 @@ function popup(event: any) {
         const statLevel = pokemon.stats[i].effort;
         stats.push(`${stat}:${statLevel}`);
       }
-      new pokemonComponent(pokemon, content!).render();
+      // new pokemonComponent(pokemon, content!).render();
       let popup = document.createElement('div');
       popup.className = 'popup';
       popupContainer?.appendChild(popup);
-      console.log(pokemon);
       popup!.innerHTML = `
-      <div class="popup" >
+      <div class="closeContainer">
+      <button class="closeContainer">
+  <img class="close" src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39219/preview.png" alt="Snow">
+  </button>
+</div>
       <h1>${pokemon.name}  #${pokemon.id}</h1>
       <div class='imgPopupContainer'>
 '      <img class ='imgPopup' src=' ${pokemon.sprites.other.dream_world.front_default}'></div>
@@ -77,8 +85,15 @@ function popup(event: any) {
         <h3 class="statsPopup"> types: ${stats}</h3>
         
 
-      </div>
       `;
+      const closePopups = document.querySelectorAll('.close');
+      for (let i = 0; i < closePopups.length; i++) {
+        const closePopup = closePopups[i];
+        closePopup!.addEventListener('click', () => {
+          popupContainer!.style.display = 'none';
+          popup.remove();
+        });
+      }
     }
   }
 
@@ -103,6 +118,13 @@ function pagination() {
             const itemDiv = itemDivs[i];
             itemDiv.addEventListener('click', popup);
           }
+          const closePopups = document.querySelectorAll('.close');
+          for (let i = 0; i < closePopups.length; i++) {
+            const closePopup = closePopups[i];
+            closePopup!.addEventListener('click', () => {
+              console.log("gg");
+            });
+          }
         }
       }
     });
@@ -110,6 +132,7 @@ function pagination() {
 }
 
 function removeAllDivs() {
+  console.log("object");
   const pokemonsDivBeforeSearch = document.querySelectorAll('.pokemonElement');
   pokemonsDivBeforeSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();
@@ -145,6 +168,11 @@ function search() {
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
     }
+  }
+  const divsAfterSearch = document.querySelectorAll('.item');
+  for (let i = 0; i < divsAfterSearch.length; i++) {
+    const divAfterSearch = divsAfterSearch[i];
+    divAfterSearch.addEventListener('click', popup);
   }
 }
 

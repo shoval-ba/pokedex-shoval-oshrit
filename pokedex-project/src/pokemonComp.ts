@@ -28,13 +28,14 @@ export class pokemonComponent {
     <div class ='backgroundImg' id ="${this.data.id}">
     <img class ='img' src=' ${this.data.sprites.other.dream_world.front_default}'>
     </div>
-    <div class="title">
+    <div class="title" id='${this.data.id}'>
     <h1 class="name"> ${this.data.name}</h1>
     <h3 class="id"> id: ${this.data.id}</h3>
     </div>
       `;
     pokemonElement.classList.add('pokemonElement');
 
+    pokemonElement.id=`${this.data.id}`
   }
 
   // Renders the pokemons after searce with the information about them.
@@ -55,13 +56,13 @@ export class pokemonComponent {
       abilitiesName.push(' ' + name);
     }
     item.innerHTML = `
-    <div class ='backgroundImg'>
+    <div class ='backgroundImg' id ="${this.data.id}">
     <img class ='img' id ="${this.data.id} "src=' ${this.data.sprites.other.dream_world.front_default}'>
     </div>
-    <div class="title">
+    <div class="title" id ="${this.data.id}>
     <h1 class="name"> ${this.data.name}</h1>
     </div>
-    <div class='info'>
+    <div class='info' id ="${this.data.id}>
     <h3 class="id"> id: ${this.data.id}</h3>
       <h3 class="weight"> weight: ${this.data.weight / 10} kg </h3>
       <h3 class="height"> height: ${this.data.height / 10} m</h3>
@@ -70,6 +71,7 @@ export class pokemonComponent {
     </div>
       `;
     item.classList.add('item');
+    item.id=`${this.data.id}`
   }
 
 }
