@@ -2,7 +2,7 @@ import { Pokemon, pokemonComponent } from './pokemonComp';
 
 const api_url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
 
-export const pokemons: any[] = [];
+export let pokemons: any[] = [];
 
 // Gets the data from the website.
 export async function getApi(url: string) {
@@ -72,9 +72,9 @@ function popup(event: any) {
       popup!.innerHTML = `
       <div class="closeContainer">
       <button class="closeContainer">
-  <img class="close" src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39219/preview.png" alt="Snow">
-  </button>
-</div>
+        <img class="close" src="https://d29fhpw069ctt2.cloudfront.net/icon/image/39219/preview.png" alt="Snow">
+      </button>
+      </div>
       <h1>${pokemon.name}  #${pokemon.id}</h1>
       <div class='imgPopupContainer'>
 '      <img class ='imgPopup' src=' ${pokemon.sprites.other.dream_world.front_default}'></div>
@@ -185,8 +185,7 @@ window.onload = () => {
   const pokemonList = document.getElementById('mainPage');
   pokemonList!.addEventListener('click', backToMainPage);
   pagination();
+  const paginationFirstButton = document.getElementsByClassName('butttonPagination')[0] as HTMLElement;
+  paginationFirstButton.style.background = 'rgb(86, 207, 167)';
 };
 
-// function popup() {
-//   console.log("object");
-// }
