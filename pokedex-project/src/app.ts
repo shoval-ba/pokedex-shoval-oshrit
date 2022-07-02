@@ -1,4 +1,4 @@
-import { Pokemon, pokemonComponent } from "./pokimonComp";
+import { Pokemon, pokemonComponent } from "./pokemonComp";
 
 const api_url = "https://pokeapi.co/api/v2/pokemon?limit=151"
 
@@ -27,17 +27,39 @@ export async function renderIt() {
   console.log(pokemons);
   let content: HTMLElement | null = document.querySelector('#content2');
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
-  let characterImgs =document.querySelectorAll(".img")
-  for (let i = 0; i < characterImgs.length; i++) {
-    const characterimg = characterImgs[i];
-    characterimg.addEventListener('click',popup)
+  let itemDivs = document.querySelectorAll(".pokemonElement")
+  for (let i = 0; i < itemDivs.length; i++) {
+    const itemDiv = itemDivs[i];
+    itemDiv.addEventListener('click', popup)
   }
 }
-function popup(){
-  console.log("3");
+function popup(event: any) {
+  let currentPokemon = event.target.parentElement.id;
+
+  console.log(currentPokemon);
+  removeAllDivs();
+  let popupContainer: HTMLElement | null = document.querySelector(".popupContainer");
+  popupContainer!.style.display = 'block';
+  for (const pokemon of pokemons) {
+    if (pokemon.id == currentPokemon!) {
+      popupContainer!.innerHTML = `
+
+<div class="popup" >
+<h1>rfkhrf</h1>
+</div>
+`
+    }
+  }
+
 }
+// characterImg!.addEventListener('click', popup)
+
+
+// console.log("3");
+// }
 // Search for some pokemon by name
-function search() {
+
+function removeAllDivs() {
   const pokemonsDivBeforeSearch = document.querySelectorAll('.pokemonElement');
   pokemonsDivBeforeSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();
@@ -46,49 +68,54 @@ function search() {
   pokemonsDivAfterSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();
   });
+}
+
+// Search for some pokemon by name
+function search() {
+  removeAllDivs();
   const search: HTMLInputElement | null = document.querySelector('.search');
   const value = search?.value.toLowerCase();
-  const valueCheck = Number(search?.value);
-  
+
   if (value === "") {
-    let content: HTMLElement | null = document.querySelector('#content2')
+    let content: HTMLElement | null = document.querySelector('#content2');
     pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
 
   }
-  else if (valueCheck == value) {
+
+  else if (Number(value)) {
     for (const pokemon of pokemons) {
-      if (pokemon.id == valueCheck!) {
-        let content: HTMLElement | null = document.querySelector('#content')
+      if (pokemon.id == Number(value)!) {
+        let content: HTMLElement | null = document.querySelector('#content');
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
     }
-    
+
   }
   else {
     for (const pokemon of pokemons) {
       if (pokemon.name.toLowerCase().includes(value!)) {
-        let content: HTMLElement | null = document.querySelector('#content')
+        let content: HTMLElement | null = document.querySelector('#content');
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
-      // else if(valueCheck==Number)
     }
   }
 }
+
+function backToMainPage() {
+  removeAllDivs();
+  let content: HTMLElement | null = document.querySelector('#content2');
+  pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+}
+
 window.onload = () => {
   renderIt();
   const searchButton = document.getElementsByClassName('searchButton')[0];
   searchButton!.addEventListener('click', search);
+  const pokemonList = document.getElementById('mainPage');
+  pokemonList!.addEventListener('click', backToMainPage);
 }
 
 // function popup() {
 //   console.log("object");
 // }
 
-
-// let characterImg=document.querySelector(".img")
-// console.log(characterImg);
-// for (let i = 0; i < array.length; i++) {
-//   const element = array[i];
-  
-// }
-// characterImg!.addEventListener('click', popup)
