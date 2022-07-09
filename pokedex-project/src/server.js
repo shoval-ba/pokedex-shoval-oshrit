@@ -18,6 +18,7 @@ const express = require('express');
 const path = require("path");
 const app =express();
 const fs = require("fs");
+let favorits=[];
 filePath = path.join(__dirname,'../data/data.json');
 let readFileData = JSON.parse(fs.readFileSync(filePath,"utf8"))
 
@@ -34,6 +35,14 @@ app.get('/app.js',(req,res)=>{
 })
 app.get('/pokemonsData',(req,res)=>{
   res.send(readFileData)
+})
+app.post('/favoritePokemons',(req,res)=>{
+console.log(req.body);
+  let favoritePokemon = req.body;
+  readFileData.push(favorits);
+})
+app.get('/favoritePokemons',(req,res)=>{
+  res.send(pokemons)
 })
 app.listen(5000,()=>{
   console.log("listen to port 5000");
