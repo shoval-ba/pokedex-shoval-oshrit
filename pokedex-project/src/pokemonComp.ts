@@ -24,6 +24,7 @@ export class pokemonComponent {
     parent.appendChild(pokemonElement);
     pokemonElement.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
+    <i class="fa-solid fa-square-star"></i>
     <img class ='img' id ="${this.data.id}" src=' ${this.data.sprites.other.dream_world.front_default}'>
     </div>
     <div class="title" id='${this.data.id}'>
@@ -56,6 +57,7 @@ export class pokemonComponent {
     item.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
     <img class ='img' id ="${this.data.id}" src=' ${this.data.sprites.other.dream_world.front_default}'>
+    <i class="fa-solid fa-square-star"></i>
     </div>
     <div class="title" id ="${this.data.id}" style.font-family:"KoHo", sans-serif;>
     <h1 class="name" id ="${this.data.id}"> ${this.data.name}</h1>

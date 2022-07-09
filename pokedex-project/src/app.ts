@@ -1,6 +1,7 @@
 import { pokemonComponent } from './pokemonComp';
+// const request = require('request');
 
-const api_url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
+const api_url = 'http://localhost:5000/pokemonsData';
 
 export const pokemons: any[] = [];
 
@@ -9,17 +10,15 @@ export async function getApi(url: string) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    for (const pokemonData of data.results) {
-      const pokemonUrl = pokemonData.url;
-      const detailes = await fetch(pokemonUrl);
-      const pokemon = await detailes.json();
-      pokemons.push(pokemon);
+    for (const pokemonData of data) {
+      exports.pokemons.push(pokemonData);
+      console.log(pokemonData);
     }
-  } catch (error) {
+  }
+  catch (error) {
     console.error(error);
   }
 }
-
 // Render the pokemons.
 export async function renderIt() {
   await getApi(api_url);
@@ -92,6 +91,12 @@ function popup(event: any) {
           popup.remove();
         });
       }
+      popupContainer?.addEventListener('click', () => {
+
+        popupContainer!.style.display = 'none';
+        popup.remove();
+
+      })
     }
   }
 }

@@ -215,13 +215,13 @@ body {
     top: 0;
     padding-top: 100px;
     .popup {
-      margin-top: 1250px;
       display: block;
       width: 700px;
       height: 600px;
       margin-left: 500px;
       background-color: aliceblue;
       border-radius: 40px;
+      position: fixed;
       display: flex;
       flex-direction: column;
       font-family: "Montserrat Alternates", sans-serif;
@@ -246,12 +246,6 @@ body {
       }
       .weightPopup {
         font-family: "Gilda Display", serif;
-      }
-      .heightPopup {
-      }
-      .abilitiesPopup {
-      }
-      .typesPopup {
       }
       .statsPopup {
         display: flex;
