@@ -12,13 +12,13 @@ export async function getApi(url: string) {
     const data = await response.json();
     for (const pokemonData of data) {
       exports.pokemons.push(pokemonData);
-      console.log(pokemonData);
     }
   }
   catch (error) {
     console.error(error);
   }
 }
+
 // Render the pokemons.
 export async function renderIt() {
   await getApi(api_url);
@@ -203,10 +203,18 @@ function backToMainPage() {
   }
 }
 
-function addToFavorite(event?: Event) {
-  let pokemonId = event?.target?.id;
+// Add 
+function addToFavorite(event: any) {
+  let pokemonId= event?.target.id;
   // let pokemon =exports.pokemons[pokemonId];
   console.log(pokemonId);
+  for (const pokemon of pokemons) {
+    if (pokemon.id == pokemonId) {
+      const content: HTMLElement | null = document.querySelector('#content');
+      new pokemonComponent(pokemon, content!).renderAfterSearch();
+    }
+  }
+  
 }
 
 window.onload = () => {
