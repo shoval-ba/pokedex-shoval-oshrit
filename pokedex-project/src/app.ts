@@ -26,15 +26,16 @@ export async function renderIt() {
   const content: HTMLElement | null = document.querySelector('#content2');
   const pokemons20 = pokemons.filter(pokemon => pokemon.id <= 20);
   pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
-  const itemDivs = document.querySelectorAll('.pokemonElement');
-  for (let i = 0; i < itemDivs.length; i++) {
-    const itemDiv = itemDivs[i];
-    itemDiv.addEventListener('click', popup);
-  }
-  const divsAfterSearch = document.querySelectorAll('.item');
+  const divsAfterSearch = document.querySelectorAll('.img');
   for (let i = 0; i < divsAfterSearch.length; i++) {
     const divAfterSearch = divsAfterSearch[i];
     divAfterSearch.addEventListener('click', popup);
+  }
+
+  const favoriteButton = document.querySelectorAll('.fa.fa-star');
+  for (let i = 0; i < favoriteButton.length; i++) {
+    const favorite = favoriteButton[i];
+    favorite.addEventListener('click', addToFavorite);
   }
 }
 
@@ -114,12 +115,18 @@ function pagination() {
           const pokemons20 = pokemons.filter(pokemon => pokemon.id <= j * 20 && pokemon.id > j * 20 - 20);
           const content: HTMLElement | null = document.querySelector('#content2');
           pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
-          const itemDivs = document.querySelectorAll('.pokemonElement');
+          const itemDivs = document.querySelectorAll('.img');
           pagination();
           button.style.background = 'rgb(86, 207, 167)';
           for (let i = 0; i < itemDivs.length; i++) {
             const itemDiv = itemDivs[i];
             itemDiv.addEventListener('click', popup);
+          }
+
+          const favoriteButton = document.querySelectorAll('.fa.fa-star');
+          for (let i = 0; i < favoriteButton.length; i++) {
+            const favorite = favoriteButton[i];
+            favorite.addEventListener('click', addToFavorite);
           }
         }
       }
@@ -165,10 +172,16 @@ function search() {
       }
     }
   }
-  const divsAfterSearch = document.querySelectorAll('.item');
+  const divsAfterSearch = document.querySelectorAll('.img');
   for (let i = 0; i < divsAfterSearch.length; i++) {
     const divAfterSearch = divsAfterSearch[i];
     divAfterSearch.addEventListener('click', popup);
+  }
+
+  const favoriteButton = document.querySelectorAll('.fa.fa-star');
+  for (let i = 0; i < favoriteButton.length; i++) {
+    const favorite = favoriteButton[i];
+    favorite.addEventListener('click', addToFavorite);
   }
 }
 
@@ -177,11 +190,23 @@ function backToMainPage() {
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content2');
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
-  const itemDivs = document.querySelectorAll('.pokemonElement');
+  const itemDivs = document.querySelectorAll('.img');
   for (let i = 0; i < itemDivs.length; i++) {
     const itemDiv = itemDivs[i];
     itemDiv.addEventListener('click', popup);
   }
+
+  const favoriteButton = document.querySelectorAll('.fa.fa-star');
+  for (let i = 0; i < favoriteButton.length; i++) {
+    const favorite = favoriteButton[i];
+    favorite.addEventListener('click', addToFavorite);
+  }
+}
+
+function addToFavorite(event?: Event) {
+  let pokemonId = event?.target?.id;
+  // let pokemon =exports.pokemons[pokemonId];
+  console.log(pokemonId);
 }
 
 window.onload = () => {

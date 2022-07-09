@@ -33,6 +33,11 @@ gulp.task('index', () => {
     .pipe(gulp.dest('./dist'));
 });
 
+gulp.task('server', () => {
+  return gulp.src(['./src/server.js'])
+    .pipe(gulp.dest('./dist'));
+});
+
 // Browser Sync
 gulp.task('browser-sync', () => {
   browserSync.init({
@@ -83,6 +88,7 @@ gulp.task('default', gulp.series(
   'index',
   'tsc',
   'build',
+  'server',
   gulp.parallel(
     'browser-sync',
     'browser-sync-watch',
