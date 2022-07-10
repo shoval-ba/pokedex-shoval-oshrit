@@ -13,8 +13,7 @@ export async function getApi(url: string) {
     for (const pokemonData of data) {
       pokemons.push(pokemonData);
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.error(error);
   }
 }
@@ -97,7 +96,7 @@ function popup(event: any) {
         popupContainer!.style.display = 'none';
         popup.remove();
 
-      })
+      });
     }
   }
 }
@@ -203,11 +202,11 @@ function backToMainPage() {
   }
 }
 
-// Add 
+// Add
 function addToFavorite(event: any) {
-  let pokemonId = event?.target.id;
+  const pokemonId = event?.target.id;
   // let pokemon =exports.pokemons[pokemonId];
-  pokemons[pokemonId-1]
+  pokemons[pokemonId-1];
 
 }
 

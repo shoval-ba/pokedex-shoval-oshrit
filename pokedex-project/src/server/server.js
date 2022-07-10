@@ -18,16 +18,15 @@ const path = require("path");
 const app =express();
 const fs = require("fs");
 let favorites=[];
-filePath = path.join(__dirname,'../data/data.json');
+filePath = path.join(__dirname,'../../data/data.json');
 let readFileData = JSON.parse(fs.readFileSync(filePath,"utf8"))
 
-app.get('/',(req,res)=>{
-res.sendFile(__dirname+'/index.html')
-})
 
-app.get('/app.js',(req,res)=>{
-  res.sendFile(__dirname+'/app.js')
-})
+app.use('/', express.static(path.resolve('../client')));
+app.get('/', function(req, res) { // serve main path as static file
+  res.sendFile(path.resolve('../client/index.html'))
+});
+
 app.get('/pokemonsData',(req,res)=>{
   res.send(readFileData)
 })
