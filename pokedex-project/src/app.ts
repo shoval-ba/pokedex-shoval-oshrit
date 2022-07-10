@@ -11,7 +11,7 @@ export async function getApi(url: string) {
     const response = await fetch(url);
     const data = await response.json();
     for (const pokemonData of data) {
-      exports.pokemons.push(pokemonData);
+      pokemons.push(pokemonData);
     }
   }
   catch (error) {
@@ -205,16 +205,10 @@ function backToMainPage() {
 
 // Add 
 function addToFavorite(event: any) {
-  let pokemonId= event?.target.id;
+  let pokemonId = event?.target.id;
   // let pokemon =exports.pokemons[pokemonId];
-  console.log(pokemonId);
-  for (const pokemon of pokemons) {
-    if (pokemon.id == pokemonId) {
-      const content: HTMLElement | null = document.querySelector('#content');
-      new pokemonComponent(pokemon, content!).renderAfterSearch();
-    }
-  }
-  
+  pokemons[pokemonId-1]
+
 }
 
 window.onload = () => {
