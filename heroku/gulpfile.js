@@ -16,26 +16,32 @@ gulp.task('clean', () => {
 // Creates js bundle from several js files
 gulp.task('bundle', () => {
   return webpack(webpackConfig)
-    .pipe(gulp.dest('./dist'))
+    .pipe(gulp.dest('./dist/client'))
 });
 
 // Converts scss to css
 gulp.task('scss', () => {
   return gulp.src('./src/client/**/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/client'));
 });
 
 // Transfers index
 gulp.task('index', () => {
   return gulp.src(['./src/client/**/*.html'])
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/client'));
 });
+
+gulp.task('organize', () => {
+  return gulp.src(['./dist/tsc/server/*'])
+    .pipe(gulp.dest('./dist/server'));
+});
+
 
 // Transfers index
 gulp.task('icon', () => {
   return gulp.src(['./src/client/favicon.ico'])
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('./dist/client'));
 });
 
 gulp.task('data', () => {
@@ -87,6 +93,7 @@ gulp.task('build', gulp.series(
   'index',
   'icon',
   'tsc',
+  'organize',
   'bundle',
   'data',
 ));
@@ -94,13 +101,9 @@ gulp.task('build', gulp.series(
 // Heroku copy dist files
 gulp.task('heroku-copy-dist', () => {
   return gulp.src([
-    './dist/app.js',
-    './dist/app.js.map',
-    './dist/favicon.ico',
-    './dist/index.html',
-    './dist/styles.css',
+    './dist/client/*',
   ])
-    .pipe(gulp.dest('./deploy/dist'));
+    .pipe(gulp.dest('./deploy/client'));
 });
 
 gulp.task('heroku-copy-data', () => {

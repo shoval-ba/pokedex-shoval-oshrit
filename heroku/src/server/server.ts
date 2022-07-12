@@ -23,9 +23,9 @@ let filePath = path.join(__dirname,'../data/data.json');
 let readFileData = JSON.parse(fs.readFileSync(filePath,"utf8"));
 
 
-app.use('/', express.static(path.join(__dirname,'../dist')));
+app.use('/', express.static(path.join(__dirname,'../client')));
 app.get('/', function(req :any , res:any) { // serve main path as static file
-  res.sendFile(path.join(__dirname,'../dist/index.html'));
+  res.sendFile(path.join(__dirname,'../client/index.html'));
 });
 
 app.get('/pokemonsData',(req :any, res:any)=>{

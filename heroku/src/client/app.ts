@@ -1,18 +1,16 @@
 import { pokemonComponent } from './pokemonComp';
 // const request = require('request');
 
-const api_url = 'https://pokedex-shoval.herokuapp.com/pokemonsData';
+// const api_url = 'https://localhost:5000/pokemonsData';
 
-export const pokemons: any[] = [];
+export let pokemons: any[] = [];
 
 // Gets the data from the website.
-export async function getApi(url: string) {
+export async function getApi() {
   try {
-    const response = await fetch(url);
-    const data = await response.json();
-    for (const pokemonData of data) {
-      pokemons.push(pokemonData);
-    }
+    let pokemonsData = await(await fetch('/pokemonsData')).url; 
+    let response = await fetch(pokemonsData);
+    pokemons = await response.json();
   } catch (error) {
     console.error(error);
   }
@@ -20,7 +18,7 @@ export async function getApi(url: string) {
 
 // Render the pokemons.
 export async function renderIt() {
-  await getApi(api_url);
+  await getApi();
   console.log(pokemons);
   const content: HTMLElement | null = document.querySelector('#content2');
   const pokemons20 = pokemons.filter(pokemon => pokemon.id <= 20);
@@ -48,7 +46,7 @@ function popup(event: any) {
       console.log(currentPokemon);
       console.log(pokemon);
       const typesName: any[] = [];
-      for (let i = 0; i < pokemon.types.length; i++) {
+      for (let i = 0; i < pokemon.specs.types.length; i++) {
         const type = pokemon.types[i].type;
         const name: string = type.name;
         typesName.push(' ' + name);
