@@ -34,7 +34,7 @@ gulp.task('index', () => {
 });
 
 gulp.task('server', () => {
-  return gulp.src(['./src/server/server.js'])
+  return gulp.src(['./src/server/server.ts'])
     .pipe(gulp.dest('./dist/server'));
 });
 
