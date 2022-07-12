@@ -13,32 +13,26 @@
 //     }
 //     fs.writeFileSync("../data/data.json", JSON.stringify(pokemons));
 // }
-const express = require('express');
-const path = require("path");
+
+import express from 'express';
+import path from "path";
 const app =express();
-const fs = require("fs");
-let favorites=[];
-filePath = path.join(__dirname,'../../data/data.json');
-let readFileData = JSON.parse(fs.readFileSync(filePath,"utf8"))
+import fs from "fs";
+
+let filePath = path.join(__dirname,'../data/data.json');
+let readFileData = JSON.parse(fs.readFileSync(filePath,"utf8"));
 
 
-app.use('/', express.static(path.resolve('../client')));
-app.get('/', function(req, res) { // serve main path as static file
-  res.sendFile(path.resolve('../client/index.html'))
+app.use('/', express.static(path.join(__dirname,'../dist')));
+app.get('/', function(req :any , res:any) { // serve main path as static file
+  res.sendFile(path.join(__dirname,'../dist/index.html'));
 });
 
-app.get('/pokemonsData',(req,res)=>{
-  res.send(readFileData)
+app.get('/pokemonsData',(req :any, res:any)=>{
+  res.send(readFileData);
 })
-app.post('/favoritePokemons',(req,res)=>{
-console.log(req.body);
-  let favoritePokemon = req.body;
-  readFileData.push(favorites);
-})
-app.get('/favoritePokemons',(req,res)=>{
-  res.send(pokemons)
-})
-app.listen(5000,()=>{
+
+app.listen( process.env.PORT || 5000,()=>{
   console.log("listen to port 5000");
 })
 

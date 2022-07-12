@@ -1,7 +1,7 @@
 import { pokemonComponent } from './pokemonComp';
 // const request = require('request');
 
-const api_url = 'http://localhost:5000/pokemonsData';
+const api_url = 'https://pokedex-shoval.herokuapp.com/pokemonsData';
 
 export const pokemons: any[] = [];
 
