@@ -13,6 +13,7 @@
 //     }
 //     fs.writeFileSync("../data/data.json", JSON.stringify(pokemons));
 // }
+
 const express = require('express');
 const path = require("path");
 const app =express();
@@ -22,9 +23,9 @@ filePath = path.join(__dirname,'../../data/data.json');
 let readFileData = JSON.parse(fs.readFileSync(filePath,"utf8"))
 
 
-app.use('/', express.static(path.resolve('../client')));
+app.use('/', express.static(path.resolve('../dist/client')));
 app.get('/', function(req, res) { // serve main path as static file
-  res.sendFile(path.resolve('../client/index.html'))
+  res.sendFile(path.resolve('../dist/client/index.html'))
 });
 
 app.get('/pokemonsData',(req,res)=>{

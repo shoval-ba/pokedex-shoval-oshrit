@@ -1,9 +1,9 @@
 // Runs this script only once and it save the data in the data folder.// const api_url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
 
 // const axios = require ("axios")
-// const pokemons = []; 
+// let pokemons:any[] = []; 
 // async function getData(){
-//    const dataPokemonsUrl = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=151')
+//    const dataPokemonsUrl = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=15')
 //     const data = dataPokemonsUrl.data;
 //     for (const pokemonData of data.results) {
 //       const pokemonUrl = pokemonData.url;
@@ -11,8 +11,11 @@
 //       const pokemon = detailes.data;
 //       pokemons.push(pokemon);
 //     }
-//     fs.writeFileSync("../data/data.json", JSON.stringify(pokemons));
+//     fs.writeFileSync("./dist/data/data.json", JSON.stringify(pokemons));
+//     console.log(pokemons)
 // }
+
+// getData()
 
 import express from 'express';
 import path from "path";
