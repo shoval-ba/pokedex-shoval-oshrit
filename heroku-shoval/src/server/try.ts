@@ -1,8 +1,10 @@
 const axios = require ("axios");
 import fs from "fs";
+import { idText } from "typescript";
 
 interface customData {
     name: string;
+    id:number;
     img: string;
     height: number;
     weight: number;
@@ -47,6 +49,7 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
             
             const customData: customData = {
                 name: pokemonData.name,
+                id:pokemonData.id,
                 img: pokemonData.sprites.other!.dream_world.front_default,
                 height: pokemonData.height,
                 weight: pokemonData.weight,

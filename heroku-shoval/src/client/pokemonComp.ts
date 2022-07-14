@@ -3,7 +3,7 @@
 export interface Pokemon {
   name: string;
   id: number;
-  image:string;
+  img:string;
   weight: number;
   height: number;
   abilities: any[];
@@ -26,7 +26,7 @@ export class pokemonComponent {
     pokemonElement.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
     <i  id="${this.data.id}" class="fa fa-star" aria-hidden="true"></i>
-    <img class ='img' id ="${this.data.id}" src='${this.data.image}'>
+    <img class ='img' id ="${this.data.id}" src='${this.data.img}'>
     </div>
     <div class="title" id='${this.data.id}'>
     <h1 class="name" id ="${this.data.id}"> ${this.data.name}</h1>
@@ -45,8 +45,9 @@ export class pokemonComponent {
     parent.appendChild(item);
     const typesName: any[] = [];
     for (let i = 0; i < this.data.types.length; i++) {
-      const type = this.data.types[i];
-      typesName.push(' ' + type);
+      const type = this.data.types[i].type;
+      const name: string = type.name;
+      typesName.push(' ' + name);
     }
     const abilitiesName: any[] = [];
     for (let i = 0; i < this.data.abilities.length; i++) {
@@ -56,7 +57,7 @@ export class pokemonComponent {
     }
     item.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
-    <img class ='img' id ="${this.data.id}" src=' ${this.data.image}'> 
+    <img class ='img' id ="${this.data.id}" src=' ${this.data.img}'> 
     <i  id="${this.data.id}" class="fa fa-star" aria-hidden="true"></i>
     </div>
     <div class="title" id ="${this.data.id}" style.font-family:"KoHo", sans-serif;>
@@ -67,7 +68,7 @@ export class pokemonComponent {
       <h3 class="weight" id ="${this.data.id}"> weight: ${this.data.weight} kg </h3>
       <h3 class="height" id ="${this.data.id}"> height: ${this.data.height} m</h3>
       <h3 class="abilities" id ="${this.data.id}"> abilities: ${typesName}</h3>
-      <h3 class="types" id ="${this.data.id}"> types: ${typesName}</h3>
+      <h3 class="types" id ="${this.data.id}"> types: ${abilitiesName}</h3>
     </div>
       `;
     item.classList.add('item');
