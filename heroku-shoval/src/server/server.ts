@@ -28,27 +28,11 @@ app.get('/pokemonsData',async (req :any, res:any)=>{
       pokemonsMongo.push(pokemon)
     });
   })
+  // pokemonsMongo.filter(()=>{
+    
+  // })
   res.send(pokemonsMongo)
 })
-
- 
-     // let pokemonsMongo: never[] = [];
-      // const client =  MongoClient.connect('mongodb://localhost:27017/', { useNewUrlParser: true })
-      //     .catch((err:any) => { console.log(err); });
-      // if (!client) {
-      //     return;
-      // }
-      // try {
-      //     const db = client.db("mongo_practice");
-      //     let collection = db.collection('pokemons');
-      //     pokemonsMongo = collection.find({}).toArray();
-      //     res.send(pokemonsMongo)
-      // } catch (err) {
-      //     console.log(err);
-      // } finally {
-      //     client.close();
-      // }
-      // res.send(pokemonsMongo)
   
 
 app.listen( process.env.PORT || 5000,()=>{

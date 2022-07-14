@@ -16,7 +16,7 @@ interface customData {
 
 async function loadPokemonURLS() {
     let pokemonUrlArray: any[] = [];
-    const URL = `https://pokeapi.co/api/v2/pokemon?limit=3`
+    const URL = `https://pokeapi.co/api/v2/pokemon?limit=10`
     const response = await axios.get(URL)
         .then(function (result: any) {
             pokemonUrlArray = result.data.results;
@@ -64,20 +64,20 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
     }
     let newArray:customData[]=[];
     let Firstid = pokemonJsonArray.length
-    for(let pokemon of pokemonJsonArray){
+    for(let pokemon1 of pokemonJsonArray){
         for(let pokemon2 of pokemonJsonArray){
-            if(pokemon === pokemon2) continue
+            if(pokemon1 === pokemon2) continue
             else {
                 let random = Math.random();
                 let newPokemon:customData = {
-                    name : pokemon.name.slice(0,4) + pokemon2.name.slice(4,6),
+                    name : pokemon1.name.slice(0,4) + pokemon2.name.slice(4,6),
                     id: Firstid + 1,
-                    img: random < 0.5 ? pokemon.img : pokemon2.img,
-                    weight: (pokemon.weight + pokemon2.weight) / 2,
-                    height: (pokemon.height + pokemon2.height) / 2,
-                    abilities: random > 0.5 ? pokemon.abilities : pokemon2.abilities,
-                    types: random < 0.5 ? pokemon.types : pokemon2.types,
-                    stats: random > 0.5 ? pokemon.stats : pokemon2.stats,
+                    img: pokemon2.img,
+                    weight: (pokemon1.weight + pokemon2.weight) / 2,
+                    height: (pokemon1.height + pokemon2.height) / 2,
+                    abilities: random > 0.5 ? pokemon1.abilities : pokemon2.abilities,
+                    types: random < 0.5 ? pokemon1.types : pokemon2.types,
+                    stats: random > 0.5 ? pokemon1.stats : pokemon2.stats,
                 }
                 Firstid ++;
                 newArray.push(newPokemon)
@@ -92,13 +92,14 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
 }).then(pokemonJsonArray=> {
     // console.log(pokemonJsonArray);
     // Creating a json file for our server (contains all data)
-    fs.writeFile('./dist/data.json', JSON.stringify(pokemonJsonArray), (err)=>{
-        if(err) throw err;
-    });
+    // fs.writeFile('./dist/data.json', JSON.stringify(pokemonJsonArray), (err)=>{
+    //     if(err) throw err;
+    // });
     MongoClient.connect(url, function(err:Error, db:any) {
         if (err) throw err;
         var dbo = db.db("pokemonsDB");
         // dbo.collection("pokemons").insertMany(pokemonJsonArray);
-        // dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
+        // dbo.collection("pokemons").deleteMany({});
+        dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
     })
 })
