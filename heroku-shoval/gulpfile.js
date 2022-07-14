@@ -49,6 +49,7 @@ gulp.task('data', () => {
     .pipe(gulp.dest('./dist/data'));
 });
 
+
 // Watch scss files
 gulp.task('watch-scss', () => {
   return gulp.watch('./src/client/**/*.scss', gulp.series('scss'));

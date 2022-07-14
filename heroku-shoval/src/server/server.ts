@@ -1,21 +1,3 @@
-// Runs this script only once and it save the data in the data folder.// const api_url = 'https://pokeapi.co/api/v2/pokemon?limit=151';
-
-// const axios = require ("axios")
-// let pokemons:any[] = []; 
-// async function getData(){
-//    const dataPokemonsUrl = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=15')
-//     const data = dataPokemonsUrl.data;
-//     for (const pokemonData of data.results) {
-//       const pokemonUrl = pokemonData.url;
-//       const detailes =await axios.get(pokemonUrl);
-//       const pokemon = detailes.data;
-//       pokemons.push(pokemon);
-//     }
-//     fs.writeFileSync("./dist/data/data.json", JSON.stringify(pokemons));
-//     console.log(pokemons)
-// }
-
-// getData()
 
 import express from 'express';
 import path from "path";
@@ -25,15 +7,49 @@ import fs from "fs";
 let filePath = path.join(__dirname,'../data/data.json');
 let readFileData = JSON.parse(fs.readFileSync(filePath,"utf8"));
 
+let  MongoClient = require('mongodb').MongoClient;
+let  uri = "mongodb://localhost:27017/";
 
 app.use('/', express.static(path.join(__dirname,'../client')));
 app.get('/', function(req :any , res:any) { // serve main path as static file
   res.sendFile(path.join(__dirname,'../client/index.html'));
 });
 
-app.get('/pokemonsData',(req :any, res:any)=>{
-  res.send(readFileData);
+// app.get('/pokemonsData',(req :any, res:any)=>{
+//   res.send(readFileData);
+// })
+
+let pokemonsMongo: any[] = [];
+app.get('/pokemonsData',async (req :any, res:any)=>{
+  await MongoClient.connect(uri, function(err:Error, db:any) {
+    if (err) throw err;
+    var dbo = db.db("pokemonsDB");
+    dbo.collection("pokemons").find({}).forEach((pokemon: any) =>{
+      pokemonsMongo.push(pokemon)
+    });
+  })
+  res.send(pokemonsMongo)
 })
+
+ 
+     // let pokemonsMongo: never[] = [];
+      // const client =  MongoClient.connect('mongodb://localhost:27017/', { useNewUrlParser: true })
+      //     .catch((err:any) => { console.log(err); });
+      // if (!client) {
+      //     return;
+      // }
+      // try {
+      //     const db = client.db("mongo_practice");
+      //     let collection = db.collection('pokemons');
+      //     pokemonsMongo = collection.find({}).toArray();
+      //     res.send(pokemonsMongo)
+      // } catch (err) {
+      //     console.log(err);
+      // } finally {
+      //     client.close();
+      // }
+      // res.send(pokemonsMongo)
+  
 
 app.listen( process.env.PORT || 5000,()=>{
   console.log("listen to port 5000");

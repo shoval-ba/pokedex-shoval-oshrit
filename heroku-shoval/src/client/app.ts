@@ -3,8 +3,6 @@ import { popup } from './popUp'
 import { pagination } from './pagination'
 import { search } from './search'
 
-// const api_url = 'https://localhost:5000/pokemonsData';
-
 export let pokemons: any[] = [];
 
 // Gets the data from the website.
@@ -18,6 +16,16 @@ export async function getApi() {
   }
 }
 
+// async function getFromMongo() {
+//   try {
+//     let pokemonsData = await(await fetch('/data')).url; 
+//     let response = await fetch(pokemonsData);
+//     pokemons = await response.json();
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
 // Render the pokemons.
 export async function renderIt() {
   await getApi();
@@ -30,7 +38,7 @@ export async function renderIt() {
     const divAfterSearch = divsAfterSearch[i];
     divAfterSearch.addEventListener('click', popup);
   }
-  
+
   // const favoriteButton = document.querySelectorAll('.fa.fa-star');
   // for (let i = 0; i < favoriteButton.length; i++) {
   //   const favorite = favoriteButton[i];
