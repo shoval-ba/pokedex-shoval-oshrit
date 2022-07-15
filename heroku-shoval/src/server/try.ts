@@ -16,7 +16,7 @@ interface customData {
 
 async function loadPokemonURLS() {
     let pokemonUrlArray: any[] = [];
-    const URL = `https://pokeapi.co/api/v2/pokemon?limit=10`
+    const URL = `https://pokeapi.co/api/v2/pokemon?limit=500`
     const response = await axios.get(URL)
         .then(function (result: any) {
             pokemonUrlArray = result.data.results;
@@ -31,7 +31,6 @@ async function fetchData(pokemon: any) {
     const response = await axios.get(URL)
     let data = response.data;
     return data;
-
 }
 
 /**
@@ -95,11 +94,12 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
     // fs.writeFile('./dist/data.json', JSON.stringify(pokemonJsonArray), (err)=>{
     //     if(err) throw err;
     // });
-    MongoClient.connect(url, function(err:Error, db:any) {
+    MongoClient.connect(url, async function(err:Error, db:any) {
         if (err) throw err;
         var dbo = db.db("pokemonsDB");
-        // dbo.collection("pokemons").insertMany(pokemonJsonArray);
+        await dbo.collection("pokemons").insertMany(pokemonJsonArray);
         // dbo.collection("pokemons").deleteMany({});
-        dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
+        // dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
+        console.log("done")
     })
 })

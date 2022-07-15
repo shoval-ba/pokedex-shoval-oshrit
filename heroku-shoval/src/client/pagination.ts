@@ -3,33 +3,33 @@ import { popup } from './popUp'
 import { pokemonComponent } from './pokemonComp';
 
 // Search for some pokemon by name
-export function pagination() {
+export async function pagination() {
     const paginationButtons = document.getElementsByClassName('butttonPagination');
+    let pokemons: any[] =[];
     for (let i = 0; i < paginationButtons.length; i++) {
       const button = paginationButtons[i] as HTMLButtonElement;
       button.style.background = '#ddd';
-      button.addEventListener('click', () => {
-        for (let j = 1; j < 9; j++) {
-          if (button.innerHTML == j.toString()) {
+      button.addEventListener('click', async () => {
+        console.log(button.innerHTML)
+        let number = Number(button.innerHTML)
+            try {
+              let pokemonsData = await(await fetch(`/pokemonsData${number*40-40}`)).url; 
+              let response = await fetch(pokemonsData);
+              pokemons = await response.json();
+              console.log(pokemons)
+            } catch (error) {
+              console.error(error);
+            }
             removeAllDivs();
-            const pokemons20 = pokemons.filter(pokemon => pokemon.id <= j * 20 && pokemon.id > j * 20 - 20);
             const content: HTMLElement | null = document.querySelector('#content2');
-            pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
-            const itemDivs = document.querySelectorAll('.img');
-            pagination();
+            pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+            pagination(); 
             button.style.background = 'rgb(86, 207, 167)';
+            const itemDivs = document.querySelectorAll('.img');
             for (let i = 0; i < itemDivs.length; i++) {
               const itemDiv = itemDivs[i];
               itemDiv.addEventListener('click', popup);
             }
-  
-            // const favoriteButton = document.querySelectorAll('.fa.fa-star');
-            // for (let i = 0; i < favoriteButton.length; i++) {
-            //   const favorite = favoriteButton[i];
-            //   favorite.addEventListener('click', addToFavorite);
-            // }
-          }
-        }
       });
     }
   }

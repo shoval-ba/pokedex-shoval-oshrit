@@ -8,7 +8,7 @@ export let pokemons: any[] = [];
 // Gets the data from the website.
 export async function getApi() {
   try {
-    let pokemonsData = await(await fetch('/pokemonsData')).url; 
+    let pokemonsData = await(await fetch('/pokemonsData0')).url; 
     let response = await fetch(pokemonsData);
     pokemons = await response.json();
   } catch (error) {
@@ -20,10 +20,9 @@ export async function getApi() {
 // Render the pokemons.
 export async function renderIt() {
   await getApi();
-  console.log(pokemons);
+  // console.log(pokemons);
   const content: HTMLElement | null = document.querySelector('#content2');
-  const pokemons20 = pokemons.filter(pokemon => pokemon.id <= 20);
-  pokemons20.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+  pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
   const divsAfterSearch = document.querySelectorAll('.img');
   for (let i = 0; i < divsAfterSearch.length; i++) {
     const divAfterSearch = divsAfterSearch[i];
