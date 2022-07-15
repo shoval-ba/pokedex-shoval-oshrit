@@ -29,6 +29,26 @@ app.get('/pokemonsData:number' ,async (req :any, res:any)=>{
     res.send(result); 
 })
 
+app.get('/pokemonId:number' ,async (req :any, res:any)=>{
+  let number =0;
+  const db = await MongoClient.connect(uri);
+  var dbo = db.db("pokemonsDB");
+  const MyCollection = dbo.collection('pokemons');
+  number = Number(req.params.number)
+  const result = await MyCollection.find({}).skip(number-1).limit(1).toArray();
+  res.send(result); 
+})
+
+app.get('/pokemonName:name' ,async (req :any, res:any)=>{
+  let inputName ='';
+  const db = await MongoClient.connect(uri);
+  var dbo = db.db("pokemonsDB");
+  const MyCollection = dbo.collection('pokemons');
+  inputName = req.params.name;
+  const result = await MyCollection.find({ name:  inputName }).toArray();
+  res.send(result); 
+})
+
 app.listen( process.env.PORT || 5000,()=>{
   console.log("listen to port 5000");
 })

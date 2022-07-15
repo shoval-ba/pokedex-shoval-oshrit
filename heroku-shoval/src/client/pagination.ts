@@ -10,13 +10,11 @@ export async function pagination() {
       const button = paginationButtons[i] as HTMLButtonElement;
       button.style.background = '#ddd';
       button.addEventListener('click', async () => {
-        console.log(button.innerHTML)
         let number = Number(button.innerHTML)
             try {
               let pokemonsData = await(await fetch(`/pokemonsData${number*40-40}`)).url; 
               let response = await fetch(pokemonsData);
               pokemons = await response.json();
-              console.log(pokemons)
             } catch (error) {
               console.error(error);
             }
