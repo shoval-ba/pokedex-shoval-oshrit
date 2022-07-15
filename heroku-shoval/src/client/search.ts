@@ -1,8 +1,8 @@
 import { removeAllDivs , pokemons } from './app'
 import { pokemonComponent } from './pokemonComp';
-import { popup } from './popUp'
+import { popupAfterSearch } from './popUp'
 
-
+export let pokemonInArray:any[]=[];
 // Search for some pokemon by name
 export async function search() {
     removeAllDivs();
@@ -17,7 +17,7 @@ export async function search() {
         try {
           let pokemonsData = await(await fetch(`/pokemonId${value}`)).url; 
           let response = await fetch(pokemonsData);
-          let pokemonInArray = await response.json();
+          pokemonInArray = await response.json();
           if (pokemonInArray === []) {/* TODO:stay message */}
           else {
             pokemonInArray.forEach((pok: any) => pokemon = pok)
@@ -33,8 +33,7 @@ export async function search() {
         try {
           let pokemonsData = await(await fetch(`/pokemonName${value}`)).url; 
           let response = await fetch(pokemonsData);
-          let pokemonInArray = await response.json();
-          console.log(pokemonInArray)
+          pokemonInArray = await response.json();
           if (pokemonInArray === []) {/* TODO:stay message */}
           else {
             pokemonInArray.forEach((pok: any) => pokemon = pok)
@@ -48,6 +47,6 @@ export async function search() {
     const divsAfterSearch = document.querySelectorAll('.img');
     for (let i = 0; i < divsAfterSearch.length; i++) {
       const divAfterSearch = divsAfterSearch[i];
-      divAfterSearch.addEventListener('click', popup);
+      divAfterSearch.addEventListener('click', popupAfterSearch);
     }
   }
