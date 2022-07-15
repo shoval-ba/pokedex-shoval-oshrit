@@ -67,6 +67,8 @@ export async function pagination() {
 
 // Removes all the elements.
 export function removeAllDivs() {
+  const message: HTMLElement | null = document.querySelector('#content3');
+  message!.style.display = 'none';
   const pokemonsDivBeforeSearch = document.querySelectorAll('.pokemonElement');
   pokemonsDivBeforeSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();

@@ -206,6 +206,14 @@ body {
       }
     }
   }
+  #content3{
+    display: none;
+    #noPokemon{
+      margin: 0 auto;
+      color:rgb(129, 167, 154);
+      font-size: 70px;
+    }
+  }
   .popupContainer {
     display: none;
     width: 100%;
