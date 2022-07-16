@@ -26,6 +26,7 @@ export class pokemonComponent {
     pokemonElement.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
     <i  id="${this.data.id}" class="fa fa-star" aria-hidden="true"></i>
+    <img class ='starImage' id ="${this.data.id}" src="https://cdn-icons-png.flaticon.com/128/1040/1040230.png">
     <img class ='img' id ="${this.data.id}" src='${this.data.img}'>
     </div>
     <div class="title" id='${this.data.id}'>
@@ -57,8 +58,9 @@ export class pokemonComponent {
     }
     item.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">
-    <img class ='img' id ="${this.data.id}" src=' ${this.data.img}'> 
     <i  id="${this.data.id}" class="fa fa-star" aria-hidden="true"></i>
+    <img class ='starImage' id ="${this.data.id}" src="https://cdn-icons-png.flaticon.com/128/1040/1040230.png">
+    <img class ='img' id ="${this.data.id}" src=' ${this.data.img}'> 
     </div>
     <div class="title" id ="${this.data.id}" style.font-family:"KoHo", sans-serif;>
     <h1 class="name" id ="${this.data.id}"> ${this.data.name}</h1>

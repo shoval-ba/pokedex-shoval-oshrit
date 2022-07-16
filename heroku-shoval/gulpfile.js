@@ -37,18 +37,11 @@ gulp.task('organize', () => {
     .pipe(gulp.dest('./dist/server'));
 });
 
-
 // Transfers index
 gulp.task('icon', () => {
   return gulp.src(['./src/client/favicon.ico'])
     .pipe(gulp.dest('./dist/client'));
 });
-
-gulp.task('data', () => {
-  return gulp.src(['./src/data/*'])
-    .pipe(gulp.dest('./dist/data'));
-});
-
 
 // Watch scss files
 gulp.task('watch-scss', () => {
@@ -96,7 +89,6 @@ gulp.task('build', gulp.series(
   'tsc',
   'organize',
   'bundle',
-  'data',
 ));
 
 // Heroku copy dist files
@@ -107,16 +99,9 @@ gulp.task('heroku-copy-dist', () => {
     .pipe(gulp.dest('./deploy/client'));
 });
 
-gulp.task('heroku-copy-data', () => {
-  return gulp.src([
-    './dist/data/*',
-  ])
-    .pipe(gulp.dest('./deploy/data'));
-});
-
 gulp.task('heroku-copy-server', () => {
   return gulp.src([
-    './dist/server/server.js',
+    './dist/server/*',
   ])
     .pipe(gulp.dest('./deploy/server'));
 });
@@ -151,7 +136,6 @@ gulp.task('deploy', gulp.series(
   'build',
   'heroku-copy-root',
   'heroku-copy-dist',
-  'heroku-copy-data',
   'heroku-copy-server',
 ));
 

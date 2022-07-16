@@ -1,10 +1,10 @@
-import { pokemons } from './app'
-import { pokemonInArray } from './search'
+import { pokemons } from './app';
+import { pokemonInArray } from './search';
 
 // Popop information for the chosen pokemon.
 export function popup(event: any) {
-    const currentPokemon = event.target.id;
-    const popupContainer: HTMLElement | null = document.querySelector('.popupContainer');
+  const currentPokemon = event.target.id;
+  const popupContainer: HTMLElement | null = document.querySelector('.popupContainer');
     popupContainer!.style.display = 'block';
     for (const pokemon of pokemons) {
       if (pokemon.id == currentPokemon!) {
@@ -55,13 +55,13 @@ export function popup(event: any) {
         popupContainer?.addEventListener('click', () => {
           popupContainer!.style.display = 'none';
           popup.remove();
-  
+
         });
       }
     }
-  }
+}
 
-  // Popop information for the chosen pokemon.
+// Popop information for the chosen pokemon.
 export function popupAfterSearch(event: any) {
   const currentPokemon = event.target.id;
   const popupContainer: HTMLElement | null = document.querySelector('.popupContainer');
@@ -120,4 +120,3 @@ export function popupAfterSearch(event: any) {
     }
   }
 }
-
