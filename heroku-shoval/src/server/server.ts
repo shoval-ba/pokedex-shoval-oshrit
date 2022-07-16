@@ -55,21 +55,23 @@ app.get('/favoriteList', async (req :any, res:any) => {
   res.send(result);
 });
 
-app.get('/addToFavorite:array', function (req :any, res:any){
+app.use(express.json({limit : '1mb'}))
+app.post('/addToFavorite', function (req :any, res:any){
+  let pokemon = req.body;
   MongoClient.connect(uri, async function(err:Error, db:any) {
     if (err) throw err;
     const dbo = db.db('pokemonsDB');
-    const array:any[] = req.params.array;
-    await dbo.collection('pokemonsFavorite').insertMany(array);
+    await dbo.collection('pokemonsFavorite').insertOne(pokemon);
   });
 });
 
-app.get('/deleteFavorite:id', function (req :any, res:any){
+app.post('/deleteFavorite', function (req :any, res:any){
+  let pokemon = req.body;
+  let id = pokemon.id;
   MongoClient.connect(uri, async function(err:Error, db:any) {
     if (err) throw err;
     const dbo = db.db('pokemonsDB');
-    const id = req.params.id;
-    await dbo.collection('pokemonsFavorite').delete({id: id});
+    await dbo.collection('pokemonsFavorite').deleteOne(pokemon);
   });
 });
 

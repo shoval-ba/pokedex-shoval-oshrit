@@ -5,6 +5,7 @@ import { search } from './search';
 
 export let pokemons: any[] = [];
 export const favoriteList :any[]=[];
+export let favorites:any[]=[];
 
 // Gets the data from the website.
 export async function getApi() {
@@ -32,6 +33,20 @@ export async function renderIt() {
   for (let i = 0; i < favoriteButton.length; i++) {
     const favorite = favoriteButton[i];
     favorite.addEventListener('click', addToFavorite);
+  }
+  await getFavorite();
+  for (let pokemon of pokemons){
+    for(let favorite of favorites){
+      if(pokemon.id == favorite.id){
+        const starImages = document.querySelectorAll('.starImage');
+        for (let j=0;j <starImages.length;j++){
+          const starImage = starImages[j] as HTMLElement;
+          if (starImage!.id == pokemon.id){
+                starImage!.style.opacity = '1';
+          }
+        }
+      }
+    }
   }
 }
 
@@ -67,9 +82,10 @@ export async function pagination() {
     const favorite = favoriteButton[i];
     favorite.addEventListener('click', addToFavorite);
   }
-  for (const favorite of favoriteList){
-    for (const pokemon of pokemons){
-      if (favorite.id == pokemon.id){
+  await getFavorite();
+  for (let pokemon of pokemons){
+    for(let favorite of favorites){
+      if(pokemon.id == favorite.id){
         const starImages = document.querySelectorAll('.starImage');
         for (let j=0;j <starImages.length;j++){
           const starImage = starImages[j] as HTMLElement;
@@ -99,9 +115,25 @@ export async function addToFavorite(event:any){
                 const index:number = favoriteList.indexOf(pokemon);
                 if (index! === undefined) return;
                 favoriteList.splice(index, 1);
+                const options ={
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(pokemon)
+                }
+                fetch('deleteFavorite' , options)
               } else {
                 starImage!.style.opacity = '1';
                 favoriteList.push(pokemon);
+                const options ={
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(pokemon)
+                }
+                fetch('addToFavorite' , options)
               }
             }
           }
@@ -109,27 +141,25 @@ export async function addToFavorite(event:any){
       }
     }
   }
-  // console.log(favoriteList);
-  // try {
-  //   await fetch(`/addToFavorite${favoriteList}`);
-  // } catch (error) {
-  //   console.error(error);
-  // }
 }
 
-async function getFavorite(){
-  // let favorites:any[]=[];
-  // try {
-  //   const pokemonsData = await(await fetch('/favoriteList')).url;
-  //   const response = await fetch(pokemonsData);
-  //   favorites = await response.json();
-  // } catch (error) {
-  //   console.error(error);
-  // }
+
+export async function getFavorite(){
+  try {
+    const pokemonsData = await(await fetch('/favoriteList')).url;
+    const response = await fetch(pokemonsData);
+    favorites = await response.json();
+  } catch (error) {
+    console.error(error);
+  }
+}
+async function renderFavorites(){
+  await getFavorite();
+  console.log(favorites)
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content');
-  favoriteList.forEach(pokemon => new pokemonComponent(pokemon, content!).renderAfterSearch());
-  for (const favorite of favoriteList){
+  favorites.forEach(pokemon => new pokemonComponent(pokemon, content!).renderAfterSearch());
+  for (const favorite of favorites){
     for (const pokemon of pokemons){
       if (favorite.id == pokemon.id){
         const starImages = document.querySelectorAll('.starImage');
@@ -159,7 +189,7 @@ export function removeAllDivs() {
 }
 
 // Renders all the pokemons.
-function backToMainPage() {
+async function backToMainPage() {
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content2');
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
@@ -168,9 +198,10 @@ function backToMainPage() {
     const itemDiv = itemDivs[i];
     itemDiv.addEventListener('click', popup);
   }
-  for (const favorite of favoriteList){
-    for (const pokemon of pokemons){
-      if (favorite.id == pokemon.id){
+  await getFavorite();
+  for (let pokemon of pokemons){
+    for(let favorite of favorites){
+      if(pokemon.id == favorite.id){
         const starImages = document.querySelectorAll('.starImage');
         for (let j=0;j <starImages.length;j++){
           const starImage = starImages[j] as HTMLElement;
@@ -196,7 +227,7 @@ window.onload = () => {
   const pokemonList = document.getElementById('mainPage');
   pokemonList!.addEventListener('click', backToMainPage);
   const favoriteList = document.getElementById('favoriteList');
-  favoriteList!.addEventListener('click', getFavorite);
+  favoriteList!.addEventListener('click', renderFavorites);
   pagination();
   const paginationFirstButton = document.getElementsByClassName('butttonPagination')[0] as HTMLElement;
   paginationFirstButton.style.background = 'rgb(86, 207, 167)';

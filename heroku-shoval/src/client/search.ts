@@ -1,4 +1,4 @@
-import { removeAllDivs, pokemons, addToFavorite , favoriteList} from './app';
+import { removeAllDivs, pokemons, addToFavorite , favorites , getFavorite} from './app';
 import { pokemonComponent } from './pokemonComp';
 import { popupAfterSearch } from './popUp';
 
@@ -63,9 +63,10 @@ export async function search() {
     const favorite = favoriteButton[i];
     favorite.addEventListener('click', addToFavorite);
   }
-  for (const favorite of favoriteList){
-    for (const pokemon of pokemons){
-      if (favorite.id == pokemon.id){
+  await getFavorite();
+  for (let pokemon of pokemons){
+    for(let favorite of favorites){
+      if(pokemon.id == favorite.id){
         const starImages = document.querySelectorAll('.starImage');
         for (let j=0;j <starImages.length;j++){
           const starImage = starImages[j] as HTMLElement;
