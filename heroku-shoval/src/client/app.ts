@@ -1,7 +1,7 @@
 import { pokemonComponent } from './pokemonComp';
 import { popup } from './popUp';
-// import { pagination } from './pagination'
-import { pokemonInArray, search } from './search';
+import { addToFavorite } from './favorite'
+import {  search } from './search';
 
 export let pokemons: any[] = [];
 export const favoriteList :any[]=[];
@@ -21,7 +21,6 @@ export async function getApi() {
 // Render the pokemons.
 export async function renderIt() {
   await getApi();
-  // console.log(pokemons);
   const content: HTMLElement | null = document.querySelector('#content2');
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
   const divsAfterSearch = document.querySelectorAll('.img');
@@ -98,98 +97,6 @@ export async function pagination() {
   }
 }
 
-export async function addToFavorite(event:any){
-  const id = event.target.id;
-  console.log(id);
-  for (const pokemon of pokemons){
-    if (pokemon.id == id){
-      const items = document.querySelectorAll('.backgroundImg') ;
-      for (let i = 0; i < items.length; i++) {
-        const itemDiv = items[i];
-        if (itemDiv.id == id){
-          const starImages = document.querySelectorAll('.starImage');
-          for (let j=0;j <starImages.length;j++){
-            const starImage = starImages[j] as HTMLElement;
-            if (starImage!.id == id){
-              if (starImage!.style.opacity === '1'){
-                starImage!.style.opacity = '0';
-                const index:number = favoriteList.indexOf(pokemon);
-                if (index! === undefined) return;
-                favoriteList.splice(index, 1);
-                const options ={
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(pokemon)
-                };
-                fetch('deleteFavorite', options);
-              } else {
-                starImage!.style.opacity = '1';
-                favoriteList.push(pokemon);
-                const options ={
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(pokemon)
-                };
-                fetch('addToFavorite', options);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-export async function addToFavoriteAfterSearch(event:any){
-  const id = event.target.id;
-  console.log(id);
-  for (const pokemon of pokemonInArray){
-    if (pokemon.id == id){
-      const items = document.querySelectorAll('.backgroundImg') ;
-      for (let i = 0; i < items.length; i++) {
-        const itemDiv = items[i];
-        if (itemDiv.id == id){
-          const starImages = document.querySelectorAll('.starImage');
-          for (let j=0;j <starImages.length;j++){
-            const starImage = starImages[j] as HTMLElement;
-            if (starImage!.id == id){
-              if (starImage!.style.opacity === '1'){
-                starImage!.style.opacity = '0';
-                const index:number = favoriteList.indexOf(pokemon);
-                if (index! === undefined) return;
-                favoriteList.splice(index, 1);
-                const options ={
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(pokemon)
-                };
-                fetch('deleteFavorite', options);
-              } else {
-                starImage!.style.opacity = '1';
-                favoriteList.push(pokemon);
-                const options ={
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify(pokemon)
-                };
-                fetch('addToFavorite', options);
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
 export async function getFavorite(){
   try {
     const pokemonsData = await(await fetch('/favoriteList')).url;
@@ -199,6 +106,7 @@ export async function getFavorite(){
     console.error(error);
   }
 }
+
 async function renderFavorites(){
   await getFavorite();
   console.log(favorites);
@@ -272,6 +180,6 @@ window.onload = () => {
   const favoriteList = document.getElementById('favoriteList');
   favoriteList!.addEventListener('click', renderFavorites);
   pagination();
-  const paginationFirstButton = document.getElementsByClassName('butttonPagination')[0] as HTMLElement;
+  const paginationFirstButton = document.getElementsByClassName('butttonPagination')[1] as HTMLElement;
   paginationFirstButton.style.background = 'rgb(86, 207, 167)';
 };

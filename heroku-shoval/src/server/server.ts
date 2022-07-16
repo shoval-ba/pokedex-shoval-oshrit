@@ -11,14 +11,14 @@ app.get('/', function(req :any, res:any) { // serve main path as static file
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-if (process.env.NODE_ENV === 'production'){
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/index.html'));
-  });
-}
+// if (process.env.NODE_ENV === 'production'){
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/index.html'));
+//   });
+// }
 
 app.get('/pokemonsData:number', async (req :any, res:any) => {
-  let number =0;
+  let number = 0;
   const db = await MongoClient.connect(uri);
   const dbo = db.db('pokemonsDB');
   const MyCollection = dbo.collection('pokemons');
@@ -28,12 +28,12 @@ app.get('/pokemonsData:number', async (req :any, res:any) => {
 });
 
 app.get('/pokemonId:number', async (req :any, res:any) => {
-  let number =0;
+  let inputId =0;
   const db = await MongoClient.connect(uri);
   const dbo = db.db('pokemonsDB');
   const MyCollection = dbo.collection('pokemons');
-  number = Number(req.params.number);
-  const result = await MyCollection.find({}).skip(number-1).limit(1).toArray();
+  inputId = Number(req.params.number);
+  const result = await MyCollection.find({id: inputId}).toArray();
   res.send(result);
 });
 
@@ -67,7 +67,6 @@ app.post('/addToFavorite', function (req :any, res:any){
 
 app.post('/deleteFavorite', function (req :any, res:any){
   const pokemon = req.body;
-  const id = pokemon.id;
   MongoClient.connect(uri, async function(err:Error, db:any) {
     if (err) throw err;
     const dbo = db.db('pokemonsDB');

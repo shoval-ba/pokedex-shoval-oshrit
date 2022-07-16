@@ -1,6 +1,7 @@
-import { removeAllDivs, pokemons, addToFavoriteAfterSearch, favorites, getFavorite} from './app';
+import { removeAllDivs, pokemons, favorites, getFavorite} from './app';
 import { pokemonComponent } from './pokemonComp';
 import { popupAfterSearch } from './popUp';
+import { addToFavoriteAfterSearch } from './favorite';
 
 function noPokemon(){
   const content: HTMLElement | null = document.querySelector('#content3');
@@ -64,7 +65,7 @@ export async function search() {
     favorite.addEventListener('click', addToFavoriteAfterSearch);
   }
   await getFavorite();
-  for (const pokemon of pokemons){
+  for (const pokemon of pokemonInArray){
     for (const favorite of favorites){
       if (pokemon.id == favorite.id){
         const starImages = document.querySelectorAll('.starImage');

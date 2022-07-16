@@ -1,7 +1,7 @@
 const axios = require('axios');
 import fs from 'fs';
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb://localhost:27017/';
+const url = 'mongodb+srv://shoval-ba:shoval31@cluster0.3pm6f.mongodb.net/?retryWrites=true&w=majority';
 
 interface customData {
     name: string;
