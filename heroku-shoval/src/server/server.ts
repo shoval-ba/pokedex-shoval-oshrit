@@ -55,9 +55,9 @@ app.get('/favoriteList', async (req :any, res:any) => {
   res.send(result);
 });
 
-app.use(express.json({limit : '1mb'}))
+app.use(express.json({limit: '1mb'}));
 app.post('/addToFavorite', function (req :any, res:any){
-  let pokemon = req.body;
+  const pokemon = req.body;
   MongoClient.connect(uri, async function(err:Error, db:any) {
     if (err) throw err;
     const dbo = db.db('pokemonsDB');
@@ -66,8 +66,8 @@ app.post('/addToFavorite', function (req :any, res:any){
 });
 
 app.post('/deleteFavorite', function (req :any, res:any){
-  let pokemon = req.body;
-  let id = pokemon.id;
+  const pokemon = req.body;
+  const id = pokemon.id;
   MongoClient.connect(uri, async function(err:Error, db:any) {
     if (err) throw err;
     const dbo = db.db('pokemonsDB');
