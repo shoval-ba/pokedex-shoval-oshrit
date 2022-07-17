@@ -16,7 +16,7 @@ interface customData {
 
 async function loadPokemonURLS() {
   let pokemonUrlArray: any[] = [];
-  const URL = 'https://pokeapi.co/api/v2/pokemon?limit=500';
+  const URL = 'https://pokeapi.co/api/v2/pokemon?limit=300';
   const response = await axios.get(URL)
     .then(function (result: any) {
       pokemonUrlArray = result.data.results;
@@ -92,9 +92,12 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
   MongoClient.connect(url, async function(err:Error, db:any) {
     if (err) throw err;
     const dbo = db.db('pokemonsDB');
-    await dbo.collection('pokemons').insertMany(pokemonJsonArray);
+    while (pokemonJsonArray.length){
+      await dbo.collection('pokemons').insertMany(pokemonJsonArray.splice(0,5001));
+      console.log('done');
+    }
+    console.log("done all")
     // dbo.collection("pokemons").deleteMany({});
     // dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
-    console.log('done');
   });
 });

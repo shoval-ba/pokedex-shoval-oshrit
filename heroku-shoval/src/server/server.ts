@@ -4,18 +4,12 @@ import path from 'path';
 const app =express();
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb://localhost:27017/';
+const uri = 'mongodb+srv://shoval-ba:shoval31@cluster0.3pm6f.mongodb.net/?retryWrites=true&w=majority';
 
 app.use('/', express.static(path.join(__dirname, '../client')));
 app.get('/', function(req :any, res:any) { // serve main path as static file
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
-
-// if (process.env.NODE_ENV === 'production'){
-//   app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/index.html'));
-//   });
-// }
 
 app.get('/pokemonsData:number', async (req :any, res:any) => {
   let number = 0;

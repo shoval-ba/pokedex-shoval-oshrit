@@ -1,1 +1,1 @@
-web: node server/serverHeroku.js
+web: node server/server.js

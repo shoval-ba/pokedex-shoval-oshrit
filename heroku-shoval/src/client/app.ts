@@ -10,9 +10,8 @@ export let favorites:any[]=[];
 // Gets the data from the website.
 export async function getApi() {
   try {
-    const pokemonsData = await(await fetch('/pokemonsData0')).url;
-    const response = await fetch(pokemonsData);
-    pokemons = await response.json();
+    const pokemonsData = await fetch('/pokemonsData0');
+    await pokemonsData.json().then(res =>pokemons =res)
   } catch (error) {
     console.error(error);
   }
@@ -58,9 +57,8 @@ export async function pagination() {
     button.addEventListener('click', async () => {
       const number = Number(button.innerHTML);
       try {
-        const pokemonsData = await(await fetch(`/pokemonsData${number*40-40}`)).url;
-        const response = await fetch(pokemonsData);
-        pokemons = await response.json();
+        const pokemonsData = await fetch(`/pokemonsData${number*40-40}`);
+        await pokemonsData.json().then(res =>pokemons =res)
       } catch (error) {
         console.error(error);
       }
@@ -99,9 +97,8 @@ export async function pagination() {
 
 export async function getFavorite(){
   try {
-    const pokemonsData = await(await fetch('/favoriteList')).url;
-    const response = await fetch(pokemonsData);
-    favorites = await response.json();
+    const pokemonsData = await fetch('/favoriteList');
+    await pokemonsData.json().then(res =>pokemons =res)
   } catch (error) {
     console.error(error);
   }

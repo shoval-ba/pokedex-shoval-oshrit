@@ -21,9 +21,8 @@ export async function search() {
   } else if (Number(value)) {
     let pokemon:any;
     try {
-      const pokemonsData = await(await fetch(`/pokemonId${value}`)).url;
-      const response = await fetch(pokemonsData);
-      pokemonInArray = await response.json();
+      const pokemonsData = await fetch(`/pokemonId${value}`);
+      await pokemonsData.json().then(res =>pokemonInArray =res)
       if (pokemonInArray.length === 0) {
         noPokemon();
       } else {
@@ -38,9 +37,8 @@ export async function search() {
   } else {
     let pokemon:any;
     try {
-      const pokemonsData = await(await fetch(`/pokemonName${value}`)).url;
-      const response = await fetch(pokemonsData);
-      pokemonInArray = await response.json();
+      const pokemonsData = await fetch(`/pokemonName${value}`);
+      await pokemonsData.json().then(res =>pokemonInArray =res)
       console.log(pokemonInArray);
       if (pokemonInArray.length === 0) {
         noPokemon();
