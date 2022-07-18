@@ -17,12 +17,13 @@ export async function search() {
   if (value === '') {
     const content: HTMLElement | null = document.querySelector('#content2');
     pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
+    pokemonInArray=pokemons
 
   } else if (Number(value)) {
     let pokemon:any;
     try {
       const pokemonsData = await fetch(`/pokemonId${value}`);
-      await pokemonsData.json().then(res =>pokemonInArray =res)
+     await pokemonsData.json().then(res =>pokemonInArray =res)
       if (pokemonInArray.length === 0) {
         noPokemon();
       } else {
@@ -35,21 +36,17 @@ export async function search() {
     new pokemonComponent(pokemon, content!).renderAfterSearch();
 
   } else {
-    let pokemon:any;
     try {
       const pokemonsData = await fetch(`/pokemonName${value}`);
       await pokemonsData.json().then(res =>pokemonInArray =res)
-      console.log(pokemonInArray);
       if (pokemonInArray.length === 0) {
         noPokemon();
-      } else {
-        pokemonInArray.forEach((pok: any) => pokemon = pok);
-      }
+      } 
     } catch (error) {
       console.error(error);
     }
     const content: HTMLElement | null = document.querySelector('#content');
-    new pokemonComponent(pokemon, content!).renderAfterSearch();
+    pokemonInArray.forEach((pokemon: any) => new pokemonComponent(pokemon, content!).renderAfterSearch());
   }
   const divsAfterSearch = document.querySelectorAll('.img');
   for (let i = 0; i < divsAfterSearch.length; i++) {

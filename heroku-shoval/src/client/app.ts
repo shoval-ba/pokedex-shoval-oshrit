@@ -98,7 +98,7 @@ export async function pagination() {
 export async function getFavorite(){
   try {
     const pokemonsData = await fetch('/favoriteList');
-    await pokemonsData.json().then(res =>pokemons =res)
+    await pokemonsData.json().then(res =>favorites =res)
   } catch (error) {
     console.error(error);
   }
@@ -106,12 +106,10 @@ export async function getFavorite(){
 
 async function renderFavorites(){
   await getFavorite();
-  console.log(favorites);
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content');
   favorites.forEach(pokemon => new pokemonComponent(pokemon, content!).renderAfterSearch());
   for (const favorite of favorites){
-    console.log(favorite);
     const starImages = document.querySelectorAll('.starImage');
     for (let j=0;j <starImages.length;j++){
       const starImage = starImages[j] as HTMLElement;
@@ -125,7 +123,7 @@ async function renderFavorites(){
 // Removes all the elements.
 export function removeAllDivs() {
   const message: HTMLElement | null = document.querySelector('#content3');
-  message!.style.opacity = '0';
+  message!.style.display = 'none';
   const pokemonsDivBeforeSearch = document.querySelectorAll('.pokemonElement');
   pokemonsDivBeforeSearch.forEach(pokemonDiv => {
     pokemonDiv.remove();
@@ -146,7 +144,7 @@ async function backToMainPage() {
     const itemDiv = itemDivs[i];
     itemDiv.addEventListener('click', popup);
   }
-  await getFavorite();
+  getFavorite();
   for (const pokemon of pokemons){
     for (const favorite of favorites){
       if (pokemon.id == favorite.id){

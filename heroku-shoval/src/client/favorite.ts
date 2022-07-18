@@ -48,7 +48,6 @@ export async function addToFavorite(event:any){
   
   export async function addToFavoriteAfterSearch(event:any){
     const id = event.target.id;
-    console.log(id);
     for (const pokemon of pokemonInArray){
       if (pokemon.id == id){
         const items = document.querySelectorAll('.backgroundImg') ;
