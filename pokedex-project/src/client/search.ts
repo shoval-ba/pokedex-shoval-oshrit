@@ -23,17 +23,17 @@ export async function search() {
     let pokemon:any;
     try {
       const pokemonsData = await fetch(`/pokemonId${value}`);
-     await pokemonsData.json().then(res =>pokemonInArray =res)
-      if (pokemonInArray.length === 0) {
+      await pokemonsData.json().then(res =>pokemon =res)
+      if (pokemon== {}) {
+        console.log(pokemon)
         noPokemon();
       } else {
-        pokemonInArray.forEach((pok: any) => pokemon = pok);
+        const content: HTMLElement | null = document.querySelector('#content');
+        new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
     } catch (error) {
       console.error(error);
     }
-    const content: HTMLElement | null = document.querySelector('#content');
-    new pokemonComponent(pokemon, content!).renderAfterSearch();
 
   } else {
     try {

@@ -1,23 +1,32 @@
 const axios = require('axios');
-import fs from 'fs';
-const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://shoval-ba:shoval31@cluster0.3pm6f.mongodb.net/?retryWrites=true&w=majority';
+// import fs from 'fs';
+// const MongoClient = require('mongodb').MongoClient;
+// const url = 'mongodb+srv://shoval-ba:shoval31@cluster0.3pm6f.mongodb.net/?retryWrites=true&w=majority';
 
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: "postgres://dfxhbbzrpkojps:34c220d66fc6bfd7c387a0297d96582b12959fa4093d1bfd4873616fa64176fa@ec2-54-87-179-4.compute-1.amazonaws.com:5432/d7okfer9krsm48",
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+client.connect();
 interface customData {
-    name: string;
-    id:number;
-    img: string;
-    height: number;
-    weight: number;
-    types: any[];
-    abilities: any[];
-    stats:any[];
+  name: string;
+  id: number;
+  img: string;
+  height: number;
+  weight: number;
+  types: any[];
+  abilities: any[];
+  stats: any[];
 }
 
 async function loadPokemonURLS() {
   let pokemonUrlArray: any[] = [];
-  const URL = 'https://pokeapi.co/api/v2/pokemon?limit=300';
-  const response = await axios.get(URL)
+  const URL = 'https://pokeapi.co/api/v2/pokemon?limit=10';
+  await axios.get(URL)
     .then(function (result: any) {
       pokemonUrlArray = result.data.results;
     });
@@ -41,9 +50,9 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
   const pokemonJsonArray: customData[] = [];
 
   /**
-     * Goes through every URL=> fetches data=> compiles only
-     * wanted data (global app interface) => adds it to array
-     */
+   * Goes through every URL=> fetches data=> compiles only
+   * wanted data (global app interface) => adds it to array
+   */
   for (const pokemonUrl of pokemonUrlArray) {
     await fetchData(pokemonUrl).then(pokemonData => {
 
@@ -61,14 +70,14 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
       pokemonJsonArray.push(customData);
     });
   }
-  const newArray:customData[]=[];
+  const newArray: customData[] = [];
   let Firstid = pokemonJsonArray.length;
-  for (const pokemon1 of pokemonJsonArray){
-    for (const pokemon2 of pokemonJsonArray){
+  for (const pokemon1 of pokemonJsonArray) {
+    for (const pokemon2 of pokemonJsonArray) {
       if (pokemon1 === pokemon2) continue;
       else {
         const random = Math.random();
-        const newPokemon:customData = {
+        const newPokemon: customData = {
           name: pokemon1.name.slice(0, 4) + pokemon2.name.slice(4, 6),
           id: Firstid + 1,
           img: pokemon2.img,
@@ -78,26 +87,59 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
           types: random < 0.5 ? pokemon1.types : pokemon2.types,
           stats: random > 0.5 ? pokemon1.stats : pokemon2.stats,
         };
-        Firstid ++;
+        Firstid++;
         newArray.push(newPokemon);
       }
     }
   }
-  for (const pokemon of newArray){
+  for (const pokemon of newArray) {
     pokemonJsonArray.push(pokemon);
   }
   return pokemonJsonArray;
 
-}).then(pokemonJsonArray => {
-  MongoClient.connect(url, async function(err:Error, db:any) {
-    if (err) throw err;
-    const dbo = db.db('pokemonsDB');
-    while (pokemonJsonArray.length){
-      await dbo.collection('pokemons').insertMany(pokemonJsonArray.splice(0,5001));
-      console.log('done');
+}).then(async pokemonJsonArray => {
+  let  pokemonArray = pokemonJsonArray.map((x:any) => Object.values(x));
+for(let i=0;i<pokemonArray.length;i++){
+  // console.log(pokemonArray[i])
+  let queryString = 'INSERT INTO pokemons( name ,id , img , height , weight , types , abilities , stats) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+  client.query(queryString, pokemonArray[i], (err:any)=>{
+    if (err){
+      console.log(err);
+      // console.log(pokemonJsonArray[i]);
+    } else {
+      console.log(i);
     }
-    console.log("done all")
-    // dbo.collection("pokemons").deleteMany({});
-    // dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
-  });
+  })
+}
+
+  // MongoClient.connect(url, async function(err:Error, db:any) {
+  //   if (err) throw err;
+  //   const dbo = db.db('pokemonsDB');
+  //   while (pokemonJsonArray.length){
+  //     await dbo.collection('pokemons').insertMany(pokemonJsonArray.splice(0,5001));
+  //     console.log('done');
+  //   }
+  //   console.log("done all")
+  // dbo.collection("pokemons").deleteMany({});
+  // dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
+  // });
 });
+
+// async function init() {
+//   console.log("init")
+//   await client.query(`
+//   CREATE TABLE pokemons (
+//     name VARCHAR(255) NOT NULL,
+//     id INTEGER PRIMARY KEY,
+//     img VARCHAR(255) NOT NULL,
+//     height NUMERIC NOT NULL,
+//     weight NUMERIC NOT NULL,
+//     types TEXT [], 
+//     abilities TEXT [], 
+//     stats TEXT []
+//   );
+// `);
+// console.log("create")
+// }
+
+// init()

@@ -10,37 +10,26 @@ app.get('/', function(req :any, res:any) { // serve main path as static file
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-// Gives 40 pokemons every time by number.
-app.get('/pokemonsData:number', async (req :any, res:any) => {
-  let number = 0;
-  const db = await MongoClient.connect(uri);
-  const dbo = db.db('pokemonsDB');
-  const MyCollection = dbo.collection('pokemons');
-  number = Number(req.params.number);
-  const result = await MyCollection.find({}).skip(number).limit(40).toArray();
-  res.send(result);
+import { allPokemons , pokemonById , pokemonByName } from './db';
+
+app.get('/pokemons', (_request: any, response: any) => { 
+  allPokemons().then((pokemons) => response.json(pokemons))
 });
 
 // Gives pokemon by id after search.
-app.get('/pokemonId:number', async (req :any, res:any) => {
-  let inputId =0;
-  const db = await MongoClient.connect(uri);
-  const dbo = db.db('pokemonsDB');
-  const MyCollection = dbo.collection('pokemons');
-  inputId = Number(req.params.number);
-  const result = await MyCollection.find({id: inputId}).toArray();
-  res.send(result);
+app.get('/pokemonId:id', (req: any, response: any) => { 
+  let id = Number(req.params.id);
+  pokemonById(id).then((pokemons) => {
+   for(let pokemon of pokemons){
+    response.json(pokemon)
+   }
+  })
 });
 
 // Gives pokemon by name after search.
-app.get('/pokemonName:name', async (req :any, res:any) => {
-  let inputName ='';
-  const db = await MongoClient.connect(uri);
-  const dbo = db.db('pokemonsDB');
-  const MyCollection = dbo.collection('pokemons');
-  inputName = req.params.name;
-  const result = await MyCollection.find({ name: inputName }).toArray();
-  res.send(result);
+app.get('/pokemonName:name', (req: any, response: any) => { 
+  let name = req.params.name;
+  pokemonByName(name).then((pokemon) => response.json(pokemon))
 });
 
 // Gives favorite pokemons.

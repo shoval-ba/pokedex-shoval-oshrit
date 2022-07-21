@@ -46,14 +46,14 @@ export class pokemonComponent {
     parent.appendChild(item);
     const typesName: any[] = [];
     for (let i = 0; i < this.data.types.length; i++) {
-      const type = this.data.types[i].type;
-      const name: string = type.name;
+      let types = JSON.parse(this.data.types[i])
+      const name: string = types.type.name;
       typesName.push(' ' + name);
     }
     const abilitiesName: any[] = [];
     for (let i = 0; i < this.data.abilities.length; i++) {
-      const ability = this.data.abilities[i].ability;
-      const name: string = ability.name;
+      let abilities = JSON.parse(this.data.abilities[i])
+      const name: string = abilities.ability.name;
       abilitiesName.push(' ' + name);
     }
     item.innerHTML = `
