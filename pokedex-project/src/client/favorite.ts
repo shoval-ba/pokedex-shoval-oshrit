@@ -58,7 +58,7 @@ export async function addToFavorite(event:any){
             for (let j=0;j <starImages.length;j++){
               const starImage = starImages[j] as HTMLElement;
               if (starImage!.id == id){
-                if (starImage!.style.opacity === '1'){
+                if (starImage!.style.opacity == '1'){
                   starImage!.style.opacity = '0';
                   const index:number = favoriteList.indexOf(pokemon);
                   if (index! === undefined) return;

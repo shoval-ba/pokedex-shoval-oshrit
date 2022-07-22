@@ -47,14 +47,24 @@ export class pokemonComponent {
     const typesName: any[] = [];
     for (let i = 0; i < this.data.types.length; i++) {
       let types = JSON.parse(this.data.types[i])
-      const name: string = types.type.name;
-      typesName.push(' ' + name);
+      if(this.data.id<=10){
+        const name: string = types.type.name;
+        typesName.push(' ' + name);
+      } else {
+        const name: string = types.ability.name;
+        typesName.push(' ' + name);
+      }
     }
     const abilitiesName: any[] = [];
     for (let i = 0; i < this.data.abilities.length; i++) {
       let abilities = JSON.parse(this.data.abilities[i])
-      const name: string = abilities.ability.name;
-      abilitiesName.push(' ' + name);
+      if(this.data.id<=10){
+        const name: string = abilities.ability.name;
+        abilitiesName.push(' ' + name);
+      } else {
+        const name: string = abilities.type.name;
+        abilitiesName.push(' ' + name);
+      }
     }
     item.innerHTML = `
     <div class ='backgroundImg' id ="${this.data.id}">

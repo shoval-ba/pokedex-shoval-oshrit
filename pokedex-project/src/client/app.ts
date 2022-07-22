@@ -10,10 +10,9 @@ export let favorites:any[]=[];
 // Gets the data from the website.
 export async function getApi() {
   try {
-    const pokemonsData = await fetch('/pokemons');
+    const pokemonsData = await fetch('/pokemonsData1');
     await pokemonsData.json().then(res =>{
-      console.log(res)
-      pokemons =res
+      pokemons =res;
     })
   } catch (error) {
     console.error(error);
@@ -22,7 +21,7 @@ export async function getApi() {
 
 // Render the pokemons.
 export async function renderIt() {
-  // await getApi();
+  await getApi();
   const content: HTMLElement | null = document.querySelector('#content2');
   pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
   const divsAfterSearch = document.querySelectorAll('.img');
@@ -60,7 +59,7 @@ export async function pagination() {
     button.addEventListener('click', async () => {
       const number = Number(button.innerHTML);
       try {
-        const pokemonsData = await fetch(`/pokemonsData${number*40-40}`);
+        const pokemonsData = await fetch(`/pokemonsData${number}`);
         await pokemonsData.json().then(res =>pokemons =res)
       } catch (error) {
         console.error(error);

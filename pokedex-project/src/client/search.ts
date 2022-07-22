@@ -23,11 +23,10 @@ export async function search() {
     let pokemon:any;
     try {
       const pokemonsData = await fetch(`/pokemonId${value}`);
-      await pokemonsData.json().then(res =>pokemon =res)
-      if (pokemon== {}) {
-        console.log(pokemon)
+      await pokemonsData.json().then(res =>pokemon =res);
+      if (pokemon.length == 0) {
         noPokemon();
-      } else {
+      } else {    
         const content: HTMLElement | null = document.querySelector('#content');
         new pokemonComponent(pokemon, content!).renderAfterSearch();
       }

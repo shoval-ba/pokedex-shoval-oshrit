@@ -100,46 +100,32 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
 }).then(async pokemonJsonArray => {
   let  pokemonArray = pokemonJsonArray.map((x:any) => Object.values(x));
 for(let i=0;i<pokemonArray.length;i++){
-  // console.log(pokemonArray[i])
   let queryString = 'INSERT INTO pokemons( name ,id , img , height , weight , types , abilities , stats) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
   client.query(queryString, pokemonArray[i], (err:any)=>{
     if (err){
       console.log(err);
-      // console.log(pokemonJsonArray[i]);
     } else {
       console.log(i);
     }
   })
 }
-
-  // MongoClient.connect(url, async function(err:Error, db:any) {
-  //   if (err) throw err;
-  //   const dbo = db.db('pokemonsDB');
-  //   while (pokemonJsonArray.length){
-  //     await dbo.collection('pokemons').insertMany(pokemonJsonArray.splice(0,5001));
-  //     console.log('done');
-  //   }
-  //   console.log("done all")
-  // dbo.collection("pokemons").deleteMany({});
-  // dbo.collection("pokemons").find({}).forEach((pokemon: any) => console.log(pokemon));
-  // });
 });
 
-// async function init() {
-//   console.log("init")
-//   await client.query(`
-//   CREATE TABLE pokemons (
-//     name VARCHAR(255) NOT NULL,
-//     id INTEGER PRIMARY KEY,
-//     img VARCHAR(255) NOT NULL,
-//     height NUMERIC NOT NULL,
-//     weight NUMERIC NOT NULL,
-//     types TEXT [], 
-//     abilities TEXT [], 
-//     stats TEXT []
-//   );
-// `);
-// console.log("create")
-// }
+async function createTable() {
+  console.log("init")
+  await client.query(`
+  CREATE TABLE pokemons (
+    name VARCHAR(255) NOT NULL,
+    id INTEGER PRIMARY KEY,
+    img VARCHAR(255) NOT NULL,
+    height NUMERIC NOT NULL,
+    weight NUMERIC NOT NULL,
+    types TEXT [], 
+    abilities TEXT [], 
+    stats TEXT []
+  );
+`);
+console.log("create")
+}
 
-// init()
+// createTable()

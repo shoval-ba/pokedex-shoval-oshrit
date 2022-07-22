@@ -10,20 +10,15 @@ const client = new Client({
 
 client.connect();
 
-export async function allPokemons(){
-    const sql = `SELECT * FROM pokemons`;
-    const result = await client.query(sql);
-    const pokemons = result.rows.map((pokemon:any) => Object.assign(pokemon));
-    return pokemons;
-}
-
+// Returns 40 pokemons from the db.
 export async function get40pokemons(number:number){
-  const sql = `SELECT * FROM pokemons WHERE id=$1`;
-  const result = await client.query(sql , [number]);
+  const sql = `SELECT * FROM pokemons WHERE id  BETWEEN ((${number}*40)-39) AND (${number}*40)`;
+  const result = await client.query(sql );
   const pokemons = result.rows.map((pokemon:any) => Object.assign(pokemon));
   return pokemons;
 }
 
+// Returns pokemon by id from the db.
 export async function pokemonById(id:number){
   const sql = `SELECT * FROM pokemons WHERE id = $1`;
   const result = await client.query(sql , [id]);
@@ -31,6 +26,7 @@ export async function pokemonById(id:number){
   return pokemon;
 }
 
+// Returns pokemon by name from the db.
 export async function pokemonByName(name:string){
   const sql = `SELECT * FROM pokemons WHERE name = $1`;
   const result = await client.query(sql , [name]);
@@ -38,21 +34,43 @@ export async function pokemonByName(name:string){
   return pokemons;
 }
 
-// import { allPokemons , pokemonById , pokemonByName } from './db';
+// Returns favorite pokemons from the db.
+export async function favoriteList(){
+  const sql = `SELECT * FROM favoritePokemons`;
+  const result = await client.query(sql);
+  const pokemons = result.rows.map((pokemon:any) => Object.assign(pokemon));
+  return pokemons;
+}
 
-// app.get('/pokemons', (_request: any, response: any) => { 
-//   allPokemons().then((pokemons) => response.json(pokemons))
-// });
+// Add pokemon to the favoritePokemons db.
+export async function addToFavorite(pokemon:any){
+  let  pokemonArray = Object.values(pokemon)
+  const sql = 'INSERT INTO favoritePokemons( name ,id , img , height , weight , types , abilities , stats) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+  await client.query(sql , pokemonArray);
+}
 
-// // Gives pokemon by id after search.
-// app.get('/pokemonId:id', (req: any, response: any) => { 
-//   let id = Number(req.params.id);
-//   pokemonById(id).then((pokemon) => response.json(pokemon))
-// });
+// Delete pokemon to the favoritePokemons db.
+export async function deleteFavorite(pokemon:any){
+  let id = pokemon.id;
+  const sql = 'DELETE FROM favoritePokemons WHERE id = $1'; 
+  await client.query(sql , [id]);
+}
 
-// // Gives pokemon by name after search.
-// app.get('/pokemonName:name', (req: any, response: any) => { 
-//   let name = req.params.name;
-//   pokemonByName(name).then((pokemon) => response.json(pokemon))
-// });
+// Create table to favorite pokemons.
+async function createTable() {
+  await client.query(`
+  CREATE TABLE favoritePokemons (
+    name VARCHAR(255) NOT NULL,
+    id INTEGER PRIMARY KEY,
+    img VARCHAR(255) NOT NULL,
+    height NUMERIC NOT NULL,
+    weight NUMERIC NOT NULL,
+    types TEXT [], 
+    abilities TEXT [], 
+    stats TEXT []
+  );
+`);
+console.log("create")
+}
 
+// createTable()
