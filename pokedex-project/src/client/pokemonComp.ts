@@ -46,8 +46,8 @@ export class pokemonComponent {
     parent.appendChild(item);
     const typesName: any[] = [];
     for (let i = 0; i < this.data.types.length; i++) {
-      let types = JSON.parse(this.data.types[i])
-      if(this.data.id<=10){
+      const types = JSON.parse(this.data.types[i]);
+      if (this.data.id<=10){
         const name: string = types.type.name;
         typesName.push(' ' + name);
       } else {
@@ -57,8 +57,8 @@ export class pokemonComponent {
     }
     const abilitiesName: any[] = [];
     for (let i = 0; i < this.data.abilities.length; i++) {
-      let abilities = JSON.parse(this.data.abilities[i])
-      if(this.data.id<=10){
+      const abilities = JSON.parse(this.data.abilities[i]);
+      if (this.data.id<=10){
         const name: string = abilities.ability.name;
         abilitiesName.push(' ' + name);
       } else {

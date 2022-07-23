@@ -7,34 +7,31 @@ app.get('/', function(req :any, res:any) { // serve main path as static file
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-import { get40pokemons , pokemonById , pokemonByName , favoriteList , addToFavorite , deleteFavorite} from './db';
+import { get40pokemons, pokemonById, pokemonByName, favoriteList, addToFavorite, deleteFavorite} from './db';
 
 // Gives 40 pokemons from the db.
-app.get(`/pokemonsData:number`, (req: any, response: any) => {
-  let number: number = Number(req.params.number);
-  get40pokemons(number).then((pokemons) => response.json(pokemons))
-})
+app.get('/pokemonsData:number', (req: any, response: any) => {
+  const number = Number(req.params.number);
+  get40pokemons(number).then((pokemons) => response.json(pokemons));
+});
 
 // Gives pokemon by id after search.
-app.get('/pokemonId:id', (req: any, response: any) => { 
-  let id = Number(req.params.id);
+app.get('/pokemonId:id', (req: any, response: any) => {
+  const id = Number(req.params.id);
   pokemonById(id).then((pokemons) => {
-   for(let pokemon of pokemons){
-    response.json(pokemon)
-   }
-   if(pokemons =[]) response.json(pokemons);
-  })
+    response.json(pokemons);
+  });
 });
 
 // Gives pokemon by name after search.
-app.get('/pokemonName:name', (req: any, response: any) => { 
-  let name = req.params.name;
-  pokemonByName(name).then((pokemon) => response.json(pokemon))
+app.get('/pokemonName:name', (req: any, response: any) => {
+  const name = req.params.name;
+  pokemonByName(name).then((pokemon) => response.json(pokemon));
 });
 
 // Gives favorite pokemons.
 app.get('/favoriteList', async (req :any, response:any) => {
-  favoriteList().then((pokemons) => response.json(pokemons))
+  favoriteList().then((pokemons) => response.json(pokemons));
 });
 
 app.use(express.json({limit: '1mb'}));

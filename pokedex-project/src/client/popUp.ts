@@ -10,20 +10,31 @@ export function popup(event: any) {
       if (pokemon.id == currentPokemon!) {
         const typesName: any[] = [];
         for (let i = 0; i < pokemon.types.length; i++) {
-          const type = pokemon.types[i].type;
-          const name: string = type.name;
-          typesName.push(' ' + name);
+          const types = JSON.parse(pokemon.types[i]);
+          if (pokemon.id<=10){
+            const name: string = types.type.name;
+            typesName.push(' ' + name);
+          } else {
+            const name: string = types.ability.name;
+            typesName.push(' ' + name);
+          }
         }
         const abilitiesName: any[] = [];
         for (let i = 0; i < pokemon.abilities.length; i++) {
-          const ability = pokemon.abilities[i].ability;
-          const name: string = ability.name;
-          abilitiesName.push(' ' + name);
+          const abilities = JSON.parse(pokemon.abilities[i]);
+          if (pokemon.id<=10){
+            const name: string = abilities.ability.name;
+            abilitiesName.push(' ' + name);
+          } else {
+            const name: string = abilities.type.name;
+            abilitiesName.push(' ' + name);
+          }
         }
         const stats: any[] = [];
         for (let i = 0; i < pokemon.stats.length; i++) {
-          const stat = pokemon.stats[i].stat.name;
-          const statLevel = pokemon.stats[i].effort;
+          const pokemonStats = JSON.parse(pokemon.stats[i]);
+          const stat = pokemonStats.stat.name;
+          const statLevel = pokemonStats.effort;
           stats.push(`${stat}:${statLevel}`);
         }
         const popup = document.createElement('div');
@@ -67,23 +78,35 @@ export function popupAfterSearch(event: any) {
   const popupContainer: HTMLElement | null = document.querySelector('.popupContainer');
   popupContainer!.style.display = 'block';
   for (const pokemon of pokemonInArray) {
+    console.log(pokemon);
     if (pokemon.id == currentPokemon!) {
       const typesName: any[] = [];
       for (let i = 0; i < pokemon.types.length; i++) {
-        const type = pokemon.types[i].type;
-        const name: string = type.name;
-        typesName.push(' ' + name);
+        const types = JSON.parse(pokemon.types[i]);
+        if (pokemon.id<=10){
+          const name: string = types.type.name;
+          typesName.push(' ' + name);
+        } else {
+          const name: string = types.ability.name;
+          typesName.push(' ' + name);
+        }
       }
       const abilitiesName: any[] = [];
       for (let i = 0; i < pokemon.abilities.length; i++) {
-        const ability = pokemon.abilities[i].ability;
-        const name: string = ability.name;
-        abilitiesName.push(' ' + name);
+        const abilities = JSON.parse(pokemon.abilities[i]);
+        if (pokemon.id<=10){
+          const name: string = abilities.ability.name;
+          abilitiesName.push(' ' + name);
+        } else {
+          const name: string = abilities.type.name;
+          abilitiesName.push(' ' + name);
+        }
       }
       const stats: any[] = [];
       for (let i = 0; i < pokemon.stats.length; i++) {
-        const stat = pokemon.stats[i].stat.name;
-        const statLevel = pokemon.stats[i].effort;
+        const pokemonStats = JSON.parse(pokemon.stats[i]);
+        const stat = pokemonStats.stat.name;
+        const statLevel = pokemonStats.effort;
         stats.push(`${stat}:${statLevel}`);
       }
       const popup = document.createElement('div');

@@ -6,7 +6,7 @@ const axios = require('axios');
 const { Client } = require('pg');
 
 const client = new Client({
-  connectionString: "postgres://dfxhbbzrpkojps:34c220d66fc6bfd7c387a0297d96582b12959fa4093d1bfd4873616fa64176fa@ec2-54-87-179-4.compute-1.amazonaws.com:5432/d7okfer9krsm48",
+  connectionString: 'postgres://dfxhbbzrpkojps:34c220d66fc6bfd7c387a0297d96582b12959fa4093d1bfd4873616fa64176fa@ec2-54-87-179-4.compute-1.amazonaws.com:5432/d7okfer9krsm48',
   ssl: {
     rejectUnauthorized: false
   }
@@ -98,21 +98,21 @@ loadPokemonURLS().then(async function (pokemonUrlArray) {
   return pokemonJsonArray;
 
 }).then(async pokemonJsonArray => {
-  let  pokemonArray = pokemonJsonArray.map((x:any) => Object.values(x));
-for(let i=0;i<pokemonArray.length;i++){
-  let queryString = 'INSERT INTO pokemons( name ,id , img , height , weight , types , abilities , stats) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
-  client.query(queryString, pokemonArray[i], (err:any)=>{
-    if (err){
-      console.log(err);
-    } else {
-      console.log(i);
-    }
-  })
-}
+  const pokemonArray = pokemonJsonArray.map((x:any) => Object.values(x));
+  for (let i=0;i<pokemonArray.length;i++){
+    const queryString = 'INSERT INTO pokemons( name ,id , img , height , weight , types , abilities , stats) VALUES($1, $2, $3, $4, $5, $6, $7, $8)';
+    client.query(queryString, pokemonArray[i], (err:any) => {
+      if (err){
+        console.log(err);
+      } else {
+        console.log(i);
+      }
+    });
+  }
 });
 
 async function createTable() {
-  console.log("init")
+  console.log('init');
   await client.query(`
   CREATE TABLE pokemons (
     name VARCHAR(255) NOT NULL,
@@ -125,7 +125,7 @@ async function createTable() {
     stats TEXT []
   );
 `);
-console.log("create")
+  console.log('create');
 }
 
 // createTable()

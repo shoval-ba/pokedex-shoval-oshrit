@@ -1,7 +1,7 @@
 import { pokemonComponent } from './pokemonComp';
 import { popup } from './popUp';
-import { addToFavorite } from './favorite'
-import {  search } from './search';
+import { addToFavorite } from './favorite';
+import { search } from './search';
 
 export let pokemons: any[] = [];
 export const favoriteList :any[]=[];
@@ -11,9 +11,9 @@ export let favorites:any[]=[];
 export async function getApi() {
   try {
     const pokemonsData = await fetch('/pokemonsData1');
-    await pokemonsData.json().then(res =>{
+    await pokemonsData.json().then(res => {
       pokemons =res;
-    })
+    });
   } catch (error) {
     console.error(error);
   }
@@ -60,7 +60,7 @@ export async function pagination() {
       const number = Number(button.innerHTML);
       try {
         const pokemonsData = await fetch(`/pokemonsData${number}`);
-        await pokemonsData.json().then(res =>pokemons =res)
+        await pokemonsData.json().then(res => pokemons =res);
       } catch (error) {
         console.error(error);
       }
@@ -97,15 +97,17 @@ export async function pagination() {
   }
 }
 
+// Gives all the favorites pokemons from the DataBase.
 export async function getFavorite(){
   try {
     const pokemonsData = await fetch('/favoriteList');
-    await pokemonsData.json().then(res =>favorites =res)
+    await pokemonsData.json().then(res => favorites =res);
   } catch (error) {
     console.error(error);
   }
 }
 
+// Renders the favorites pokemons.
 async function renderFavorites(){
   await getFavorite();
   removeAllDivs();

@@ -17,30 +17,27 @@ export async function search() {
   if (value === '') {
     const content: HTMLElement | null = document.querySelector('#content2');
     pokemons.forEach(pokemon => new pokemonComponent(pokemon, content!).render());
-    pokemonInArray=pokemons
+    pokemonInArray=pokemons;
 
   } else if (Number(value)) {
-    let pokemon:any;
     try {
       const pokemonsData = await fetch(`/pokemonId${value}`);
-      await pokemonsData.json().then(res =>pokemon =res);
-      if (pokemon.length == 0) {
+      await pokemonsData.json().then(res => pokemonInArray =res);
+      if (pokemonInArray.length == 0) {
         noPokemon();
-      } else {    
-        const content: HTMLElement | null = document.querySelector('#content');
-        new pokemonComponent(pokemon, content!).renderAfterSearch();
       }
     } catch (error) {
       console.error(error);
     }
-
+    const content: HTMLElement | null = document.querySelector('#content');
+    pokemonInArray.forEach((pokemon: any) => new pokemonComponent(pokemon, content!).renderAfterSearch());
   } else {
     try {
       const pokemonsData = await fetch(`/pokemonName${value}`);
-      await pokemonsData.json().then(res =>pokemonInArray =res)
+      await pokemonsData.json().then(res => pokemonInArray =res);
       if (pokemonInArray.length === 0) {
         noPokemon();
-      } 
+      }
     } catch (error) {
       console.error(error);
     }
