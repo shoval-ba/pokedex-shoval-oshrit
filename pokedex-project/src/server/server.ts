@@ -3,7 +3,7 @@ import path from 'path';
 const app =express();
 
 app.use('/', express.static(path.join(__dirname, '../client')));
-app.get('/', function(req :any, res:any) { // serve main path as static file
+app.get('/', function(_req :any, res:any) { // serve main path as static file
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
@@ -30,19 +30,19 @@ app.get('/pokemonName:name', (req: any, response: any) => {
 });
 
 // Gives favorite pokemons.
-app.get('/favoriteList', async (req :any, response:any) => {
+app.get('/favoriteList', async (_req :any, response:any) => {
   favoriteList().then((pokemons) => response.json(pokemons));
 });
 
 app.use(express.json({limit: '1mb'}));
 // Add the pokemon to the db favorite list.
-app.post('/addToFavorite', function (req :any, response:any){
+app.post('/addToFavorite', function (req :any, _response:any){
   const pokemon = req.body;
   addToFavorite(pokemon);
 });
 
 // Delete the pokemon from the db favorite list.
-app.post('/deleteFavorite', function (req :any, response:any){
+app.post('/deleteFavorite', function (req :any, _response:any){
   const pokemon = req.body;
   deleteFavorite(pokemon);
 });

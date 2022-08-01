@@ -10,24 +10,14 @@ export function popup(event: any , pokemons:Pokemon[]) {
         const typesName: any[] = [];
         for (let i = 0; i < pokemon.types.length; i++) {
           const types = JSON.parse(pokemon.types[i]);
-          if (pokemon.id<=10){
             const name: string = types.type.name;
-            typesName.push(' ' + name);
-          } else {
-            const name: string = types.ability.name;
-            typesName.push(' ' + name);
-          }
-        }
+            typesName.push(' ' + name); }
         const abilitiesName: any[] = [];
         for (let i = 0; i < pokemon.abilities.length; i++) {
           const abilities = JSON.parse(pokemon.abilities[i]);
-          if (pokemon.id<=10){
+          
             const name: string = abilities.ability.name;
             abilitiesName.push(' ' + name);
-          } else {
-            const name: string = abilities.type.name;
-            abilitiesName.push(' ' + name);
-          }
         }
         const stats: any[] = [];
         for (let i = 0; i < pokemon.stats.length; i++) {
