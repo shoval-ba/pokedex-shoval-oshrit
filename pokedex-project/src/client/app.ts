@@ -1,4 +1,4 @@
-import { pokemonComponent } from './pokemonComp';
+import { Pokemon, pokemonComponent } from './pokemonComp';
 import { popup } from './popUp';
 import { addToFavorite } from './favorite';
 import { search } from './search';
@@ -27,27 +27,17 @@ export async function renderIt() {
   const divsAfterSearch = document.querySelectorAll('.img');
   for (let i = 0; i < divsAfterSearch.length; i++) {
     const divAfterSearch = divsAfterSearch[i];
-    divAfterSearch.addEventListener('click', popup);
+    divAfterSearch.addEventListener('click', (event)=>{
+      popup(event , pokemons)});
   }
   const favoriteButton = document.querySelectorAll('.fa.fa-star');
   for (let i = 0; i < favoriteButton.length; i++) {
     const favorite = favoriteButton[i];
-    favorite.addEventListener('click', addToFavorite);
+    favorite.addEventListener('click', (event)=>{
+      addToFavorite(event , pokemons)});
   }
   await getFavorite();
-  for (const pokemon of pokemons){
-    for (const favorite of favorites){
-      if (pokemon.id == favorite.id){
-        const starImages = document.querySelectorAll('.starImage');
-        for (let j=0;j <starImages.length;j++){
-          const starImage = starImages[j] as HTMLElement;
-          if (starImage!.id == pokemon.id){
-                starImage!.style.opacity = '1';
-          }
-        }
-      }
-    }
-  }
+  renderTheStars(pokemons)
 }
 
 // Search for some pokemon by name
@@ -72,23 +62,30 @@ export async function pagination() {
       const itemDivs = document.querySelectorAll('.img');
       for (let i = 0; i < itemDivs.length; i++) {
         const itemDiv = itemDivs[i];
-        itemDiv.addEventListener('click', popup);
+        itemDiv.addEventListener('click', (event)=>{
+          popup(event , pokemons)});
       }
     });
   }
   const favoriteButton = document.querySelectorAll('.fa.fa-star');
   for (let i = 0; i < favoriteButton.length; i++) {
     const favorite = favoriteButton[i];
-    favorite.addEventListener('click', addToFavorite);
+    favorite.addEventListener('click', (event)=>{
+      addToFavorite(event , pokemons)});
   }
   await getFavorite();
+  renderTheStars(pokemons)
+}
+
+// Add star for all the favorite pokemons.
+export function renderTheStars(pokemons: Pokemon[]){
   for (const pokemon of pokemons){
     for (const favorite of favorites){
       if (pokemon.id == favorite.id){
         const starImages = document.querySelectorAll('.starImage');
         for (let j=0;j <starImages.length;j++){
           const starImage = starImages[j] as HTMLElement;
-          if (starImage!.id == pokemon.id){
+          if (starImage!.id == String(pokemon.id)){
                 starImage!.style.opacity = '1';
           }
         }
@@ -146,27 +143,17 @@ async function backToMainPage() {
   const itemDivs = document.querySelectorAll('.img');
   for (let i = 0; i < itemDivs.length; i++) {
     const itemDiv = itemDivs[i];
-    itemDiv.addEventListener('click', popup);
+    itemDiv.addEventListener('click', (event)=>{
+      popup(event , pokemons)});
   }
   getFavorite();
-  for (const pokemon of pokemons){
-    for (const favorite of favorites){
-      if (pokemon.id == favorite.id){
-        const starImages = document.querySelectorAll('.starImage');
-        for (let j=0;j <starImages.length;j++){
-          const starImage = starImages[j] as HTMLElement;
-          if (starImage!.id == pokemon.id){
-                starImage!.style.opacity = '1';
-          }
-        }
-      }
-    }
-  }
+  renderTheStars(pokemons)
 
   const favoriteButton = document.querySelectorAll('.fa.fa-star');
   for (let i = 0; i < favoriteButton.length; i++) {
     const favorite = favoriteButton[i];
-    favorite.addEventListener('click', addToFavorite);
+    favorite.addEventListener('click', (event)=>{
+      addToFavorite(event , pokemons)});
   }
 }
 
