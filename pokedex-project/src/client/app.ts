@@ -107,6 +107,7 @@ export async function getFavorite(){
 // Renders the favorites pokemons.
 async function renderFavorites(){
   await getFavorite();
+  console.log(favorites);
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content');
   favorites.forEach(pokemon => new pokemonComponent(pokemon, content!).renderAfterSearch());
