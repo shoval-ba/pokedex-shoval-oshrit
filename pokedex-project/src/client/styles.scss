@@ -377,52 +377,53 @@ body {
         width: 25.5vw;
       }
     }
-    body .icons {
+  }
+  body .icons {
+    position: relative;
+    display: grid;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 1vw;
+    grid-template-columns: repeat(3, 1fr);
+    .character5 {
       position: relative;
-      display: grid;
-      z-index: 2;
-      background-color: rgb(255, 255, 255);
-      width: 100%;
-      height: 300vw;
-      grid-template-columns: repeat(3, 1fr);
-      .character5 {
-        position: relative;
-        width: 16vw;
-        height: 15vw;
-        margin-left: 7vw;
-      }
-      .childIcon {
-        margin-top: 10vw;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-      }
+      width: 16vw;
+      height: 15vw;
+      margin-left: 7vw;
     }
-    body .navbar {
-      font-weight: bolder;
-      font-family: "Montserrat Alternates", sans-serif;
+    .childIcon {
+      margin-top: 10vw;
       display: grid;
-      grid-template-columns: repeat(2, 1fr) 6fr;
-      margin: 0 auto;
-      margin-bottom: 6.199999999999999vw;
-      background-color: rgba(155, 192, 180, 0.26);
-      height: 10vw;
-      .barChild {
-        padding-top: 1vw;
-        border: 0.2vw rgb(94, 122, 131) solid;
-        color: rgba(37, 51, 54, 0.699);
-        cursor: pointer;
-        font-size: 3.3vw;
-        .search {
-          width: 41vw;
-          height: 6.7vw;
-        }
-        .searchButton {
-          height: 7vw;
-          width: 7vw;
-        }
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  body .navbar {
+    font-weight: bolder;
+    font-family: "Montserrat Alternates", sans-serif;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 6fr;
+    margin: 0 auto;
+    margin-bottom: 6.199999999999999vw;
+    background-color: rgba(155, 192, 180, 0.26);
+    height: 10vw;
+    .barChild {
+      padding-top: 1vw;
+      border: 0.2vw rgb(94, 122, 131) solid;
+      color: rgba(37, 51, 54, 0.699);
+      cursor: pointer;
+      font-size: 3.3vw;
+      .search {
+        width: 41vw;
+        height: 6.7vw;
+      }
+      .searchButton {
+        height: 7vw;
+        width: 7vw;
       }
     }
   }
+
   %title {
     font-size: 2.8vw;
   }
