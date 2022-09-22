@@ -1,7 +1,6 @@
 const axios = require('axios');
-import fs from 'fs';
 const MongoClient = require('mongodb').MongoClient;
-const url = 'mongodb+srv://shoval-ba:shoval31@cluster0.3pm6f.mongodb.net/?retryWrites=true&w=majority';
+const url = process.env.DATA_BASE;
 
 interface customData {
     name: string;
@@ -16,11 +15,11 @@ interface customData {
 
 async function loadPokemonURLS() {
   let pokemonUrlArray: any[] = [];
-  const URL = 'https://pokeapi.co/api/v2/pokemon?limit=300';
-  const response = await axios.get(URL)
-    .then(function (result: any) {
-      pokemonUrlArray = result.data.results;
-    });
+  // const URL = 'https://pokeapi.co/api/v2/pokemon?limit=300';
+  // const response = await axios.get(URL)
+  //   .then(function (result: any) {
+  //     pokemonUrlArray = result.data.results;
+  //   });
 
   return pokemonUrlArray;
 }

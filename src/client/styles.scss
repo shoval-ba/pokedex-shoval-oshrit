@@ -9,7 +9,7 @@ $text-color: white;
 }
 
 %titlesIcons {
-  width: 190px;
+  font-size: 2vw;
   font-family: "Montserrat Alternates", sans-serif;
 }
 
@@ -23,8 +23,8 @@ $text-color: white;
 }
 
 %item {
-  border: 1px solid rgb(187, 235, 241);
-  border-radius: 7px;
+  border: 1px solid rgb(112 169 176);
+  border-radius: 1vw;
   display: grid;
   height: 100%;
   width: 100%;
@@ -33,17 +33,17 @@ $text-color: white;
   background-color: rgb(61, 158, 158);
   border-radius: 7px;
   width: 100%;
-  height: 300px;
+  height: 18vw;
 }
 
 %img {
   margin: 0 auto;
-  width: 200px;
-  height: 270px;
+  width: 10vw;
+  height: 17vw;
 }
 
 %title {
-  font-size: 120%;
+  font-size: 1.1vw;
   font-family: "Montserrat Alternates", sans-serif;
 }
 
@@ -57,11 +57,12 @@ body {
     display: grid;
     grid-template-rows: 1fr 2.5fr;
     width: 100%;
-    height: 770px;
+    height: 33vw;
     background-color: rgb(80, 156, 156);
+
     .headerImg {
       margin: 0 auto;
-      width: 680px;
+      width: 32vw;
     }
     .imgCollection {
       position: relative;
@@ -69,28 +70,29 @@ body {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       .character1 {
-        width: 300px;
-        height: 370px;
-        margin-left: 100px;
-        padding-top: 80px;
+        width: 12vw;
+        height: 15vw;
+        margin-left: 6vw;
+        padding-top: 5.5vw;
       }
       .character4 {
-        margin-top: 340px;
+        margin-top: 13vw;
         position: relative;
-        width: 300px;
-        height: 350px;
+        width: 15vw;
+        height: 16vw;
         z-index: 2;
       }
       .character2 {
-        margin-left: 100px;
-        width: 200px;
-        height: 200px;
+        margin-left: 5.7vw;
+        margin-top: 1vw;
+        width: 11vw;
+        height: 11vw;
       }
       .character3 {
         transform: rotate(340deg);
-        margin-top: 70px;
-        margin-left: 50px;
-        width: 320px;
+        margin-top: 6.5vw;
+        margin-left: 6vw;
+        width: 15.5vw;
       }
     }
   }
@@ -100,18 +102,18 @@ body {
     z-index: 2;
     background-color: rgb(255, 255, 255);
     width: 100%;
-    height: 400px;
+    height: 11vw;
     grid-template-columns: repeat(3, 1fr);
     .childIcon {
-      margin-top: 100px;
+      margin-top: 3vw;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
     }
     .character5 {
       position: relative;
-      width: 200px;
-      height: 200px;
-      margin-left: 80px;
+      width: 7vw;
+      height: 7vw;
+      margin-left: 7vw;
     }
     #phoneTitle {
       @extend %titlesIcons;
@@ -127,10 +129,11 @@ body {
     font-weight: bolder;
     font-family: "Montserrat Alternates", sans-serif;
     display: grid;
-    grid-template-columns: repeat(4, 1fr) 6fr;
+    grid-template-columns: repeat(2, 1fr) 6fr;
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 2.2vw;
     background-color: rgba(155, 192, 180, 0.26);
+    height: 4vw;
     #mainPage:hover {
       color: rgb(69, 69, 190);
     }
@@ -138,26 +141,22 @@ body {
       color: rgb(69, 69, 190);
     }
     .barChild {
-      padding: 15px 0;
-      border: 1px rgb(94, 122, 131) solid;
+      padding: 0.3vw;
+      border: 0.2vw rgb(94, 122, 131) solid;
       color: rgba(37, 51, 54, 0.699);
       cursor: pointer;
-      font-size: 20px;
+      font-size: 1.3vw;
       &:last-child {
         text-align: right;
         padding-right: 3rem;
       }
       .search {
-        width: 20rem;
-        height: 1.7rem;
-        transition: width 1s;
-        &:hover {
-          width: 21rem;
-        }
+        width: 41vw;
+        height: 2.7vw;
       }
       .searchButton {
-        height: 1.7rem;
-        width: 1.7rem;
+        height: 2.7vw;
+        width: 2.7vw;
       }
     }
     .barChild:hover {
@@ -172,13 +171,13 @@ body {
       .backgroundImg {
         @extend %backgroundImg;
         position: relative;
-        .starImage{
-          width:30px;
+        .starImage {
+          width: 2.7vw;
           height: fit-content;
           opacity: 0;
           position: absolute;
-          right:5%;
-          top:5%;
+          right: 5%;
+          top: 5%;
         }
         .img {
           @extend %img;
@@ -210,13 +209,13 @@ body {
       .backgroundImg {
         @extend %backgroundImg;
         position: relative;
-        .starImage{
-          width:30px;
+        .starImage {
+          width: 30px;
           height: fit-content;
           opacity: 0;
           position: absolute;
-          right:5%;
-          top:5%;
+          right: 5%;
+          top: 5%;
         }
         .img {
           @extend %img;
@@ -227,11 +226,11 @@ body {
       }
     }
   }
-  #content3{
+  #content3 {
     display: none;
-    #noPokemon{
+    #noPokemon {
       margin: 0 auto;
-      color:rgb(129, 167, 154);
+      color: rgb(129, 167, 154);
       font-size: 70px;
     }
   }
@@ -241,36 +240,37 @@ body {
     height: 100%;
     position: absolute;
     background: rgba(51, 51, 51, 0.733);
+    z-index: 2;
     top: 0;
     padding-top: 100px;
     .popup {
       display: block;
-      width: 700px;
-      height: 600px;
-      margin-left: 500px;
+      width: 39.6875vw;
+      height: 33.875vw;
       background-color: aliceblue;
       border-radius: 40px;
       position: fixed;
       display: flex;
       flex-direction: column;
       font-family: "Montserrat Alternates", sans-serif;
-
+      font-size: 1.2vw;
+      margin-left: 30vw;
       .btn-close {
         width: 40px;
         height: 40px;
       }
       .imgPopupContainer {
         display: flex;
-        width: 230px;
-        height: 230px;
+        width: 12.050156739800002vw;
+        height: 12.050156739800002vw;
         border-radius: 50%;
         background-color: #333;
         margin: 0 auto;
         .imgPopup {
           margin: 0 auto;
           padding-top: 30px;
-          width: 200px;
-          height: 200px;
+          width: 11.050156739800002vw;
+          height: 11.050156739800002vw;
         }
       }
       .weightPopup {
@@ -310,4 +310,133 @@ body {
   margin: 0 auto;
   width: 30px;
   height: 30px;
+}
+@media screen and (max-width: 1100px) {
+  %content {
+    grid-template-columns: repeat(3, 1fr);
+
+    %img {
+      width: 13vw;
+    }
+    %title {
+      font-size: 1.4vw;
+    }
+  }
+  // body
+  // .icons{
+  //   height: 175px;
+  // }
+}
+@media screen and (max-width: 750px) {
+  body .header {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: 1fr 2.5fr;
+    width: 100%;
+    height: 128vw;
+    background-color: rgb(80, 156, 156);
+
+    .headerImg {
+      margin: 0 auto;
+      width: 69vw;
+    }
+    .imgCollection {
+      position: relative;
+      z-index: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      .headerImg {
+        margin: 0 auto;
+        width: 98vw;
+      }
+      .character1 {
+        width: 31vw;
+        height: 39vw;
+        margin-left: 6vw;
+        padding-top: 10.5vw;
+        margin-top: 10vw;
+      }
+      .character4 {
+        margin-top: 74vw;
+        position: relative;
+        width: 32vw;
+        height: 37vw;
+        z-index: 2;
+      }
+      .character2 {
+        margin-left: -12.299999999999997vw;
+        margin-top: 1vw;
+        width: 27vw;
+        height: 27vw;
+      }
+      .character3 {
+        transform: rotate(340deg);
+        margin-top: 38.5vw;
+        margin-left: -19vw;
+        width: 25.5vw;
+      }
+    }
+  }
+  body .icons {
+    position: relative;
+    display: grid;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    height: 1vw;
+    grid-template-columns: repeat(3, 1fr);
+    .character5 {
+      position: relative;
+      width: 16vw;
+      height: 15vw;
+      margin-left: 7vw;
+    }
+    .childIcon {
+      margin-top: 10vw;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  body .navbar {
+    font-weight: bolder;
+    font-family: "Montserrat Alternates", sans-serif;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) 6fr;
+    margin: 0 auto;
+    margin-bottom: 6.199999999999999vw;
+    background-color: rgba(155, 192, 180, 0.26);
+    height: 10vw;
+    .barChild {
+      padding-top: 1vw;
+      border: 0.2vw rgb(94, 122, 131) solid;
+      color: rgba(37, 51, 54, 0.699);
+      cursor: pointer;
+      font-size: 3.3vw;
+      .search {
+        width: 41vw;
+        height: 6.7vw;
+      }
+      .searchButton {
+        height: 7vw;
+        width: 7vw;
+      }
+    }
+  }
+
+  %title {
+    font-size: 2.8vw;
+  }
+  %img {
+    width: 16vw;
+  }
+  %content {
+    grid-template-columns: repeat(2, 1fr);
+    width: 95%;
+    gap: 20px;
+  }
+  body #content2 .pokemonElement .backgroundImg .starImage {
+    width: 3vw;
+    height: fit-content;
+  }
 }

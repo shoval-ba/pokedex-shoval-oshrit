@@ -12,6 +12,7 @@ export async function getApi() {
   try {
     const pokemonsData = await fetch('/pokemonsData0');
     await pokemonsData.json().then(res =>pokemons =res)
+    console.log(pokemons)
   } catch (error) {
     console.error(error);
   }
@@ -105,7 +106,9 @@ export async function getFavorite(){
 }
 
 async function renderFavorites(){
+  console.log("jg")
   await getFavorite();
+  console.log(favorites)
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content');
   favorites.forEach(pokemon => new pokemonComponent(pokemon, content!).renderAfterSearch());
@@ -168,12 +171,12 @@ async function backToMainPage() {
 
 window.onload = () => {
   renderIt();
+  const favoriteList = document.getElementById('favoriteList');
+  favoriteList!.addEventListener('click', renderFavorites);
   const searchButton = document.getElementsByClassName('searchButton')[0];
   searchButton!.addEventListener('click', search);
   const pokemonList = document.getElementById('mainPage');
   pokemonList!.addEventListener('click', backToMainPage);
-  const favoriteList = document.getElementById('favoriteList');
-  favoriteList!.addEventListener('click', renderFavorites);
   pagination();
   const paginationFirstButton = document.getElementsByClassName('butttonPagination')[1] as HTMLElement;
   paginationFirstButton.style.background = 'rgb(86, 207, 167)';
