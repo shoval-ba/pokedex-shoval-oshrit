@@ -16,6 +16,7 @@ app.get('/pokemonsData:number', (req: any, response: any) => {
 });
 
 // Gives pokemon by id after search.
+
 app.get('/pokemonId:id', (req: any, response: any) => {
   const id = Number(req.params.id);
   pokemonById(id).then((pokemons) => {
