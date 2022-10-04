@@ -3,12 +3,12 @@
 export interface Pokemon {
   name: string;
   id: number;
-  img:string;
+  img: string;
   weight: number;
   height: number;
   abilities: any[];
   types: any[];
-  stats:any[]
+  stats: any[]
 }
 export class pokemonComponent {
   data: Pokemon;
@@ -47,7 +47,7 @@ export class pokemonComponent {
     const typesName: any[] = [];
     for (let i = 0; i < this.data.types.length; i++) {
       const types = JSON.parse(this.data.types[i]);
-      if (this.data.id<=90){
+      if (this.data.id <= 10) {
         const name: string = types.type.name;
         typesName.push(' ' + name);
       } else {
@@ -58,7 +58,7 @@ export class pokemonComponent {
     const abilitiesName: any[] = [];
     for (let i = 0; i < this.data.abilities.length; i++) {
       const abilities = JSON.parse(this.data.abilities[i]);
-      if (this.data.id<=90){
+      if (this.data.id <= 10) {
         const name: string = abilities.ability.name;
         abilitiesName.push(' ' + name);
       } else {

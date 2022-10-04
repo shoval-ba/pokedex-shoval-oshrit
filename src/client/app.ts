@@ -107,7 +107,6 @@ export async function getFavorite(){
 // Renders the favorites pokemons.
 async function renderFavorites(){
   await getFavorite();
-  console.log(favorites);
   removeAllDivs();
   const content: HTMLElement | null = document.querySelector('#content');
   favorites.forEach(pokemon => new pokemonComponent(pokemon, content!).renderAfterSearch());
@@ -160,12 +159,12 @@ async function backToMainPage() {
 
 window.onload = () => {
   renderIt();
+  const favoriteList = document.getElementById('favoriteList');
+  favoriteList!.addEventListener('click', renderFavorites);
   const searchButton = document.getElementsByClassName('searchButton')[0];
   searchButton!.addEventListener('click', search);
   const pokemonList = document.getElementById('mainPage');
   pokemonList!.addEventListener('click', backToMainPage);
-  const favoriteList = document.getElementById('favoriteList');
-  favoriteList!.addEventListener('click', renderFavorites);
   pagination();
   const paginationFirstButton = document.getElementsByClassName('butttonPagination')[1] as HTMLElement;
   paginationFirstButton.style.background = 'rgb(86, 207, 167)';

@@ -2,7 +2,7 @@
 import { Client } from 'pg';
 
 const client = new Client({
-  connectionString: 'postgres://xrwjnhlxbsyxdk:3709542c5fe71a44efd5c96270d27476b6d7327c2fde0ae2340b58f092ea69a8@ec2-54-87-179-4.compute-1.amazonaws.com:5432/d1424m9hdhmaqs',
+  connectionString: 'postgres://dfxhbbzrpkojps:34c220d66fc6bfd7c387a0297d96582b12959fa4093d1bfd4873616fa64176fa@ec2-54-87-179-4.compute-1.amazonaws.com:5432/d7okfer9krsm48',
   ssl: {
     rejectUnauthorized: false
   }

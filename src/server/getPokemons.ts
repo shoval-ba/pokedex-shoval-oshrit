@@ -1,9 +1,9 @@
-const axios = require('axios');
+import axios from 'axios';
 // import fs from 'fs';
 // const MongoClient = require('mongodb').MongoClient;
 // const url = 'mongodb+srv://shoval-ba:shoval31@cluster0.3pm6f.mongodb.net/?retryWrites=true&w=majority';
 
-const { Client } = require('pg');
+import { Client } from 'pg';
 
 const client = new Client({
   connectionString: 'postgres://xrwjnhlxbsyxdk:3709542c5fe71a44efd5c96270d27476b6d7327c2fde0ae2340b58f092ea69a8@ec2-54-87-179-4.compute-1.amazonaws.com:5432/d1424m9hdhmaqs',
